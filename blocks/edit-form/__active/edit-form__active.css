@@ -1,0 +1,16 @@
+.edit-form__active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .edit-form__active::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0.5;
+  }

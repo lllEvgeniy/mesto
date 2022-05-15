@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto</title>
+    <link rel="stylesheet" href="./pages/main.css">
+</head>
+
+<body>
+    <div class="page">
+        <header class="header">
+            <a class="header__logo" href="#">
+                <img style="max-width: 100%;" src="./img/Vector.svg" alt="Логотип Mesto">
+            </a>
+        </header>
+        <main class="content">
+            <section class="profile">
+                <div class="profile__wrapper">
+                    <img src="./img/image.jpg" alt="Фото профиля" class="profile__avatar">
+                    <div class="profile__info">
+                        <div class="profile__title">
+                            <h1 class="profile__name">Жак-Ив Кусто</h1>
+                            <div class="profile__edit-button">
+                            </div>
+                        </div>
+                        <p class="profile__occupation">
+                            Исследователь океана
+                        </p>
+
+                    </div>
+
+                </div>
+                <div class="profile__add-button">
+                </div>
+
+            </section>
+            <section class="elements">
+                <article class="element">
+                    <img class="element__img" src="./img/karchevsk.jpg" alt="">
+                    <div class="element__wrapper">
+                        <h2 class="element__title">Карачаевск</h2>
+                        <div class="element__like"></div>
+                    </div>
+                </article>
+
+                <article class="element">
+                    <img class="element__img" src="./img/montain.jpg" alt="">
+                    <div class="element__wrapper">
+                        <h2 class="element__title">Гора Эльбрус</h2>
+                        <div class="element__like"></div>
+                    </div>
+                </article>
+
+                <article class="element">
+                    <img class="element__img" src="./img/dombai.jpg" alt="">
+                    <div class="element__wrapper">
+                        <h2 class="element__title">Домбай</h2>
+                        <div class="element__like"></div>
+                    </div>
+                </article>
+
+                <article class="element">
+                    <img class="element__img" src="./img/montain2.jpg" alt="">
+                    <div class="element__wrapper">
+                        <h2 class="element__title">Гора Эльбрус</h2>
+                        <div class="element__like"></div>
+                    </div>
+                </article>
+
+                <article class="element">
+                    <img class="element__img" src="./img/dombai2.jpg" alt="">
+                    <div class="element__wrapper">
+                        <h2 class="element__title">Домбай</h2>
+                        <div class="element__like"></div>
+                    </div>
+                </article>
+
+                <article class="element">
+                    <img class="element__img" src="./img/karachaevo.jpg" alt="">
+                    <div class="element__wrapper">
+                        <h2 class="element__title">Карачаево-Чебурашка</h2>
+                        <div class="element__like"></div>
+                    </div>
+                </article>
+            </section>
+
+            <footer class="footer">
+                <p class="footer__copyright">&copy; 2022 Evgeniy Mikhiyevich</p>
+            </footer>
+        </main>
+        <div class="edit-form">
+
+            <div class="edit-form__wrapper">
+                <h2 class="edit-form__title">Редактировать профиль</h2>
+                <input value="Жак-Ив Кусто" type="text" class="edit-form__name">
+                <input value="Исследователь океана" type="text" class="edit-form__occupation">
+                <button class="edit-form__btn">Сохранить</button>
+            </div>
+            <div class="edit-form__close"></div>
+        </div>
+    </div>
+    <script src="./js.js"></script>
+</body>
+
+</html>

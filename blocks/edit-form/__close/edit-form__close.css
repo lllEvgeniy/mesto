@@ -1,0 +1,24 @@
+.edit-form__close {
+  align-self: flex-start;
+  cursor: pointer;
+  background: url(./../../../img/Close\ Icon.svg) no-repeat;
+  width: 32px;
+  height: 32px;
+  margin: 204px 0 0 0;
+  position: relative;
+  z-index: 10;
+  background-size: cover;
+}
+
+.edit-form__close:hover {
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+@media screen and (max-width: 574px) {
+  .edit-form__close {
+    width: 20px;
+    height: 20px;
+    margin: 250px 10px 0 0;
+  }
+}

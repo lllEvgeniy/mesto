@@ -10,8 +10,9 @@
 
 @media screen and (max-width: 574px) {
   .profile__occupation {
-    margin-bottom: 36px;
+    margin: 7px 0 33px 16px;
     font-size: 14px;
     line-height: 17px;
+    max-width: 225px;
   }
 }

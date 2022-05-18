@@ -2,6 +2,7 @@
   background: url(./../../../img/heart.svg) no-repeat;
   width: 29px;
   height: 19px;
+  border: none;
 }
 
 .element__like:hover {

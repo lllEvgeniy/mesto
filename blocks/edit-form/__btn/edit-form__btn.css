@@ -6,6 +6,7 @@
   font-size: 18px;
   line-height: 22px;
   border-radius: 2px;
+  margin: 0 36px 0 36px;
 }
 
 .edit-form__btn:hover {
@@ -17,5 +18,8 @@
 @media screen and (max-width: 574px) {
   .edit-form__btn {
     width: 238px;
+    margin: 0 22px 0 22px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }

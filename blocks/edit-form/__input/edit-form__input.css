@@ -1,0 +1,14 @@
+.edit-form__input {
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+  margin: 0 36px 0 36px;
+  outline: none;
+}
+
+@media screen and (max-width: 574px) {
+  .edit-form__input {
+    margin: 0 22px 0 22px;
+  }
+}

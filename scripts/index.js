@@ -8,7 +8,7 @@ let editFormName = editFormWrapper.querySelector('input[name="name"]');
 let profileName = profileTitle.querySelector('h1.profile__name');
 let profileOccupation = profileInfo.querySelector('p.profile__occupation');
 let editFormOccupation = editFormWrapper.querySelector('input[name="occupation"]');
-let editFormClose = editFormWrapper.querySelector('button.edit-form__close');
+let editFormClose = editForm.querySelector('button.edit-form__close');
 
 function editFormOpen() {
   editForm.classList.add('edit-form_active');
@@ -25,10 +25,7 @@ editFormClose.addEventListener('click', CloseForm);
 function editFormSaved(event) {
   profileName.textContent = editFormName.value;
   profileOccupation.textContent = editFormOccupation.value;
+  CloseForm();
   event.preventDefault();
 };
 editFormWrapper.addEventListener('submit', editFormSaved);
-editFormWrapper.addEventListener('submit', CloseForm);
-
-
-

@@ -1,16 +1,17 @@
-.edit-form {
+.img-popup {
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
   top: 0;
   left: 0;
-  animation: show 0.5s forwards;
   width: 100%;
   height: 100%;
+  opacity: 0;
+  animation: show 0.5s forwards;
 }
 
-.edit-form::before {
+.img-popup::before {
   content: "";
   width: 100%;
   height: 100%;

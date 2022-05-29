@@ -1,6 +1,7 @@
 .element {
     width: 100%;
-    min-height: 361px;
+    height: 357px;
     background-color: #fff;
     border-radius: 10px;
+    position: relative;
   }

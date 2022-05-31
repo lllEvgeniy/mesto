@@ -1,7 +1,7 @@
 .img-popup_active {
   visibility: visible;
   animation: mymove 0.5s forwards;
-  z-index: 100;
+
 }
 
 @keyframes mymove {

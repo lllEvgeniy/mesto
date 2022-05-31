@@ -10,6 +10,10 @@
 
 }
 
+.edit-form__input:required {
+  border: 1px solid red;
+ }
+
 @media screen and (max-width: 574px) {
   .edit-form__input {
     margin: 28px 0px 0px 20px;

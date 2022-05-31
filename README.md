@@ -8,6 +8,6 @@ ___
 + ***Grid Layout***
 + ***БЭМ Nested***
 + ***Адаптивная верстка***
-
++ ***JavaScript***
 ___
 ### **https://lllevgeniy.github.io/mesto/**

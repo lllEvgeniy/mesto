@@ -1,13 +1,13 @@
 //-----------------------------------------------------------------------------//
-const editForm = document.querySelector('.popup__form_edit-profile');
+const editForm = document.querySelector('.popup_form_edit-profile');
 const editButton = document.querySelector('button.profile__edit-button');
 const editFormName = document.querySelector('input[name="name"]');
 const profileName = document.querySelector('.profile__name');
 const profileOccupation = document.querySelector('.profile__occupation');
 const editFormOccupation = document.querySelector('input[name="occupation"]');
 const popupFormEditProfile = document.querySelector('.popup__form_edit-profile');
-const editFormWrapper = popupFormEditProfile.querySelector('.popup__wrapper');
-const newCardForm = document.querySelector('.popup__form_edit-pictures');
+const editFormWrapper = document.querySelector('.popup__wrapper');
+const newCardForm = document.querySelector('.popup_form_edit-pictures');
 const editFormClose = document.querySelectorAll('.popup__close');
 
 
@@ -132,7 +132,7 @@ addCard.addEventListener('submit', function (event) {
 // 6 Открытие попапа с картинкой
 
 const imgElement = document.querySelectorAll('.element__img');
-const imgPopup = document.querySelector('.popup__form_img');
+const imgPopup = document.querySelector('.popup_form_img');
 const imgPopupTitle = imgPopup.querySelector('.popup__signature');
 const imgPopupImage = imgPopup.querySelector('.popup__image');
 

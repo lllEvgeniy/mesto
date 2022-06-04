@@ -1,7 +1,5 @@
-.img-popup_active {
+.popup_active {
   height: 100%;
   opacity: 1;
   transition: height 0ms 0ms, opacity 600ms 0ms;
-
 }
-

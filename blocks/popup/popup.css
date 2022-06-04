@@ -1,16 +1,18 @@
-.edit-form {
+.popup {
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
   top: 0;
   left: 0;
-  animation: show 0.5s forwards;
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  transition: height 0ms 500ms, opacity 500ms 0ms;
   width: 100%;
-  height: 100%;
 }
 
-.edit-form::before {
+.popup::before {
   content: "";
   width: 100%;
   height: 100%;
@@ -18,17 +20,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
   opacity: 0.5;
-}
-
-@keyframes show {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
+  z-index: 100;
 }

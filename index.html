@@ -40,11 +40,11 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Evgeniy Mikhiyevich</p>
     </footer>
-    <div class="img-popup">
-      <figure class="img-popup__container">
-        <button type="button" class="img-popup__close"></button>
-        <img class="img-popup__image">
-        <figcaption class="img-popup__title"></figcaption>
+    <div class="popup popup__form_img">
+      <figure class="popup__cover">
+        <button type="button" class="popup__close popup__close_img"></button>
+        <img class="popup__image">
+        <figcaption class="popup__signature"></figcaption>
       </figure>
     </div>
     <template id="user">
@@ -57,26 +57,26 @@
         </div>
       </article>
     </template>
-    <div class="edit-form">
-      <div class="edit-form__container">
-        <button type="button" class="edit-form__close"></button>
-        <form name="wrapper" class="edit-form__wrapper">
-          <h2 class="edit-form__title">Редактировать профиль</h2>
-          <input name="name" type="text" class="edit-form__input">
-          <input name="occupation" type="text" class="edit-form__input">
-          <button name="saved" type="submit" class="edit-form__btn">Сохранить</button>
+    <div class="popup popup__form_edit-profile">
+      <div class="popup__container">
+        <button type="button" class="popup__close"></button>
+        <form name="editProfile" class="popup__wrapper">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input required name="name" type="text" class="popup__input">
+          <input required name="occupation" type="text" class="popup__input">
+          <button name="saved" type="submit" class="popup__btn">Сохранить</button>
         </form>
       </div>
     </div>
 
-    <div class="edit-form ">
-      <div class="edit-form__container">
-        <button type="button" class="edit-form__close"></button>
-        <form name="wrapper" class="edit-form__wrapper">
-          <h2 class="edit-form__title">Новое место</h2>
-          <input placeholder="Название" name="name" type="text" class="edit-form__input edit-form__inputt">
-          <input placeholder="Ссылка на картинку" name="occupation" type="text" class="edit-form__input edit-form__inputtt">
-          <button name="saved" type="submit" class="edit-form__btn">Создать</button>
+    <div class="popup popup__form_edit-pictures">
+      <div class="popup__container">
+        <button type="button" class="popup__close"></button>
+        <form name="newPlace" class="popup__wrapper">
+          <h2 class="popup__title">Новое место</h2>
+          <input required placeholder="Название" name="name" type="text" class="popup__input">
+          <input required placeholder="Ссылка на картинку" name="occupation" type="url" class="popup__input">
+          <button name="saved" type="submit" class="popup__btn">Создать</button>
         </form>
       </div>
     </div>

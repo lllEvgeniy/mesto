@@ -1,0 +1,11 @@
+.popup__close_img {
+  margin: 0 -37px 7px 0;
+  order: 0;
+  z-index: 1000;
+}
+
+@media screen and (max-width: 574px) {
+  .popup__close_img {
+    margin: 0 0 16px 0;
+  }
+}

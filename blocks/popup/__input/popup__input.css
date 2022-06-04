@@ -1,4 +1,4 @@
-.edit-form__input {
+.popup__input {
   font-size: 14px;
   line-height: 17px;
   border: none;
@@ -10,12 +10,8 @@
 
 }
 
-.edit-form__input:required {
-  border: 1px solid red;
- }
-
 @media screen and (max-width: 574px) {
-  .edit-form__input {
+  .popup__input {
     margin: 28px 0px 0px 20px;
     width: 238px;
   }

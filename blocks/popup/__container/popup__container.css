@@ -1,4 +1,4 @@
-.edit-form__container {
+.popup__container {
   max-width: 430px;
   height: 330px;
   border-radius: 10px;
@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 574px) {
-  .edit-form__container {
+  .popup__container {
     max-width: 282px;
     height: 322px;
   }

@@ -20,7 +20,7 @@ const closeBtnCardForm = newCardForm.querySelector('.popup__close');
 const elements = document.querySelector('.elements');
 const addButton = document.querySelector('.profile__add-button');
 const userTemplate = document.querySelector('#user').content;
-const elem = userTemplate.querySelector('.element')
+const cardTemplate = userTemplate.querySelector('.element')
 
 // открытие попапа
 function openPopup(elem) {
@@ -28,21 +28,21 @@ function openPopup(elem) {
 }
 // Закрытие попапа
 
-closeBtnEditForm.addEventListener('click', function () {
-  editForm.classList.remove('popup_active')
-});
-
-closeBtnImgPopup.addEventListener('click', function () {
-  imgPopup.classList.remove('popup_active')
-});
-
-closeBtnCardForm.addEventListener('click', function () {
-  newCardForm.classList.remove('popup_active')
-});
-
 function closePopup(elem) {
   elem.classList.remove('popup_active');
 }
+
+closeBtnEditForm.addEventListener('click', function () {
+  closePopup(editForm)
+});
+
+closeBtnImgPopup.addEventListener('click', function () {
+  closePopup(imgPopup)
+});
+
+closeBtnCardForm.addEventListener('click', function () {
+  closePopup(newCardForm)
+});
 
 // Отрытие редактора профиля
 
@@ -76,27 +76,36 @@ addButton.addEventListener('click', function () {
 // Создание карточек
 
 function createCard(cardData) {
+  const cloneCard = cardTemplate.cloneNode(true);
+  const likeElement = cloneCard.querySelector('.element__like');
+  const elementImg = cloneCard.querySelector('.element__img')
+  const elementTitle = cloneCard.querySelector('.element__title');
+  const trashElement = cloneCard.querySelector('.element__trash');
 
-  const cloneCard = elem.cloneNode(true);
   cloneCard.querySelector('.element__title').textContent = cardData.name
   cloneCard.querySelector('.element__img').src = cardData.link
   cloneCard.querySelector('.element__img').alt = cardData.name
-  //лайк
-  const likeElement = cloneCard.querySelector('.element__like');
+
   likeElement.addEventListener('click', function () {
     likeElement.classList.toggle('element__like_active');
   })
-  //удаление
-  const trashElement = cloneCard.querySelector('.element__trash');
+
   trashElement.addEventListener('click', handleDeleteCard)
+
+  elementImg.addEventListener('click', function () {
+    imgPopupImage.src = elementImg.src
+    imgPopupTitle.textContent = elementTitle.textContent
+    openPopup(imgPopup)
+  });
+
   return cloneCard;
+
 }
 
 function renderCard(cardData) {
   const cloneCard = createCard(cardData);
   elements.prepend(cloneCard);
 }
-
 
 addCard.addEventListener('submit', function (event) {
   event.preventDefault();
@@ -105,6 +114,5 @@ addCard.addEventListener('submit', function (event) {
   closePopup(newCardForm);
 })
 
-
 // создание первых 6 карточек
-initialCards.forEach(initialCard => { renderCard(initialCard) })
+initialCards.forEach(renderCard)

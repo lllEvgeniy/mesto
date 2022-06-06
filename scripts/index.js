@@ -95,6 +95,7 @@ function createCard(cardData) {
   elementImg.addEventListener('click', function () {
     imgPopupImage.src = elementImg.src
     imgPopupTitle.textContent = elementTitle.textContent
+    imgPopupImage.alt = elementTitle.textContent
     openPopup(imgPopup)
   });
 

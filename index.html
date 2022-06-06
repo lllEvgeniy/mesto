@@ -40,7 +40,7 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Evgeniy Mikhiyevich</p>
     </footer>
-    <div class="popup popup_form_img">  -----------popup__form_img----------------------------
+    <div class="popup popup_type_image">
       <figure class="popup__cover">
         <button type="button" class="popup__close popup__close_img"></button>
         <img class="popup__image">
@@ -57,25 +57,25 @@
         </div>
       </article>
     </template>
-    <div class="popup popup_form_edit-profile"> -------------popup__form_edit-profile--------------------
+    <div class="popup popup_form_edit-profile">
       <div class="popup__container">
         <button type="button" class="popup__close"></button>
         <form name="editProfile" class="popup__wrapper">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input required name="name" type="text" class="popup__input">
-          <input required name="occupation" type="text" class="popup__input">
+          <input required placeholder="Введите ваше имя" name="name" type="text" class="popup__input popup__input_name">
+          <input required placeholder="Чем вы заниметесь" name="occupation" type="text" class="popup__input popup__input_occupation">
           <button name="saved" type="submit" class="popup__btn">Сохранить</button>
         </form>
       </div>
     </div>
 
-    <div class="popup popup_form_edit-pictures">  -----------------------popup__form_edit-pictures--------------------------
+    <div class="popup popup_form_edit-pictures">
       <div class="popup__container">
         <button type="button" class="popup__close"></button>
         <form name="newPlace" class="popup__wrapper">
           <h2 class="popup__title">Новое место</h2>
-          <input required placeholder="Название" name="name" type="text" class="popup__input">
-          <input required placeholder="Ссылка на картинку" name="occupation" type="url" class="popup__input">
+          <input required placeholder="Название" name="name" type="text" class="popup__input popup__input_title">
+          <input required placeholder="Ссылка на картинку" name="link" type="url" class="popup__input popup__input_link">
           <button name="saved" type="submit" class="popup__btn">Создать</button>
         </form>
       </div>
@@ -83,6 +83,7 @@
 
 
   </div>
+  <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 

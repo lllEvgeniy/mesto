@@ -3,7 +3,7 @@
   line-height: 17px;
   border: none;
   border-bottom: solid 1px rgba(0, 0, 0, 0.2);
-  margin: 0px 9px 22px 36px;
+  margin: 0px 9px 0px 36px;
   outline: none;
   padding-bottom: 13px;
   width: 358px;
@@ -16,3 +16,29 @@
     width: 238px;
   }
 }
+
+.popup__input:focus {
+  outline: 2px #2faad6 solid;
+}
+
+
+/* .popup__input {
+
+
+
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+  margin: 0px 9px 22px 36px;
+  outline: none;
+  padding-bottom: 13px;
+  width: 358px;
+
+}
+
+@media screen and (max-width: 574px) {
+  .popup__input {
+    margin: 28px 0px 0px 20px;
+    width: 238px;
+  } */

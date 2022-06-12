@@ -1,12 +1,12 @@
 .popup__btn {
   width: 358px;
   height: 50px;
-  background-color: #000000;
-  color: #fff;
+  background-color: rgba(0, 0, 0, 1);
+  color: rgba(255, 255, 255, 1);
   font-size: 18px;
   line-height: 22px;
   border-radius: 2px;
-  margin: 23px 0 0 36px;
+  margin: 21px 0 0 36px;
 }
 
 .popup__btn:hover {

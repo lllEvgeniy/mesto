@@ -8,7 +8,6 @@ const editFormWrapper = document.querySelector('.popup__wrapper');
 const newCardForm = document.querySelector('.popup_form_edit-pictures');
 const editFormClose = document.querySelectorAll('.popup__close');
 const imgPopup = document.querySelector('.popup_type_image');
-const imgElement = document.querySelectorAll('.element__img');
 const imgPopupTitle = imgPopup.querySelector('.popup__signature');
 const imgPopupImage = imgPopup.querySelector('.popup__image');
 const addCard = newCardForm.querySelector('.popup__wrapper');
@@ -29,11 +28,24 @@ const popupContainer = document.querySelectorAll('.popup__container')
 function openPopup(elem) {
 
   elem.classList.add('popup_active');
+
+  document.addEventListener('keydown', closeEscape)
+
 }
+
+//закрытие по кнопке
+function closeEscape(elem) {
+  if (elem.key == 'Escape') {
+    const el = document.querySelector('.popup_active')
+    closePopup(el)
+  }
+}
+
 // Закрытие попапа
 
 function closePopup(elem) {
   elem.classList.remove('popup_active');
+  document.removeEventListener('keydown', closeEscape)
 }
 
 closeBtnEditForm.addEventListener('click', function () {
@@ -85,26 +97,20 @@ function createCard(cardData) {
   const elementImg = cloneCard.querySelector('.element__img')
   const elementTitle = cloneCard.querySelector('.element__title');
   const trashElement = cloneCard.querySelector('.element__trash');
-
-  cloneCard.querySelector('.element__title').textContent = cardData.name
-  cloneCard.querySelector('.element__img').src = cardData.link
-  cloneCard.querySelector('.element__img').alt = cardData.name
-
+  elementTitle.textContent = cardData.name
+  elementImg.src = cardData.link
+  elementImg.alt = cardData.name
   likeElement.addEventListener('click', function () {
     likeElement.classList.toggle('element__like_active');
   })
-
   trashElement.addEventListener('click', handleDeleteCard)
-
   elementImg.addEventListener('click', function () {
     imgPopupImage.src = elementImg.src
     imgPopupTitle.textContent = elementTitle.textContent
     imgPopupImage.alt = elementTitle.textContent
     openPopup(imgPopup)
   });
-
   return cloneCard;
-
 }
 
 function renderCard(cardData) {
@@ -117,12 +123,11 @@ addCard.addEventListener('submit', function (event) {
   renderCard({ name: titleNewPlace.value, link: linkNewPlace.value });
   addCard.reset();
   closePopup(newCardForm);
+  enableValidation(false);
 })
 
 // создание первых 6 карточек
 initialCards.forEach(renderCard)
-
-
 
 // закрытие вне дива
 popup.forEach((el) => {
@@ -136,14 +141,6 @@ popup.forEach((el) => {
 })
 
 
-// закрытие на кнопку
-
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape' && document.querySelector('.popup_active')) {
-    const el = document.querySelector('.popup_active')
-    closePopup(el)
-  }
-});
 
 
 

@@ -63,16 +63,17 @@
           <h2 class="popup__title">Редактировать профиль</h2>
 
 
-          <input  minlength="2" maxlength="40" required class="popup__input popup__input_name" placeholder="Введите ваше имя" name="name" type="text">
+          <input minlength="2" maxlength="40" required class="popup__input popup__input_name"
+            placeholder="Введите ваше имя" name="name" type="text">
 
 
           <span class="popup__input_message-error popup__input_message-error_name"></span>
 
 
-          <input  minlength="2" maxlength="200" required placeholder="Чем вы заниметесь" name="occupation" type="text"
+          <input minlength="2" maxlength="200" required placeholder="Чем вы заниметесь" name="occupation" type="text"
             class="popup__input popup__input_occupation">
           <span class="popup__input_message-error popup__input_message-error_occupation"></span>
-          <button disabled name="saved" type="submit" class="popup__btn popup__btn_disabled">Сохранить</button>
+          <button name="saved" type="submit" class="popup__btn popup__btn_disabled">Сохранить</button>
         </form>
       </div>
     </div>
@@ -82,12 +83,13 @@
         <button type="button" class="popup__close"></button>
         <form name="newPlace" class="popup__wrapper">
           <h2 class="popup__title">Новое место</h2>
-          <input minlength="2" maxlength="30" class="popup__input popup__input_title" required placeholder="Название" name="title" type="text" >
+          <input minlength="2" maxlength="30" class="popup__input popup__input_title" required placeholder="Название"
+            name="title" type="text">
           <span class="popup__input_message-error popup__input_message-error_title">Вы пропустили это поле.</span>
           <input required placeholder="Ссылка на картинку" name="link" type="url"
             class="popup__input popup__input_link">
-            <span class="popup__input_message-error popup__input_message-error_link">Вы пропустили это поле.</span>
-          <button disabled name="saved" type="submit" class="popup__btn popup__btn_disabled">Создать</button>
+          <span class="popup__input_message-error popup__input_message-error_link">Вы пропустили это поле.</span>
+          <button name="saved" type="submit" class="popup__btn popup__btn_disabled">Создать</button>
         </form>
       </div>
     </div>
@@ -96,7 +98,7 @@
   </div>
 
 
-
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
 </body>

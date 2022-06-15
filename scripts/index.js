@@ -22,6 +22,8 @@ const addButton = document.querySelector('.profile__add-button');
 const userTemplate = document.querySelector('#user').content;
 const cardTemplate = userTemplate.querySelector('.element')
 const popupOverlay = document.querySelectorAll('.popup')
+const popup = document.querySelectorAll('.popup');
+const popupContainer = document.querySelectorAll('.popup__container')
 
 // открытие попапа
 function openPopup(elem) {
@@ -122,131 +124,30 @@ initialCards.forEach(renderCard)
 
 
 
-// Функция, которая добавляет класс с ошибкой
-const showInputError = (formElement, inputElement, errorMessage) => {  //
-  // Находим элемент ошибки внутри самой функции
-  const btnElement = formElement.querySelector('.popup__btn')
-  const errorElement = formElement.querySelector(`.popup__input_message-error_${inputElement.name}`);
-  // Остальной код такой же
+// закрытие вне дива
+popup.forEach((el) => {
+  el.addEventListener('mousedown', (e) => {
+    const container = el.querySelector('.popup__container')
+    const click = e.composedPath().includes(container);
+    if (!click) {
+      closePopup(el)
+    }
+  })
+})
 
-  inputElement.classList.add('popup__input_type_error');
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input_message-error_active');
-  btnElement.classList.add('popup__btn_disabled');
-  btnElement.setAttribute('disabled', true);
-  //formElement.removeEventListener('dblclick', doubleClickHandler)
-};
 
-const hideInputError = (formElement, inputElement) => {
-  // Находим элемент ошибки
-  const btnElement = formElement.querySelector('.popup__btn');
-  const errorElement = formElement.querySelector(`.popup__input_message-error_${inputElement.name}`);
-  // Остальной код такой же
-  inputElement.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('popup__input_message-error_active');
-  errorElement.textContent = '';
-  btnElement.classList.remove('popup__btn_disabled')
-  btnElement.removeAttribute('disabled');
-  //coverHeading.removeEventListener('dblclick', doubleClickHandler)
-};
+// закрытие на кнопку
 
-// Функция, которая проверяет валидность поля
-const isValid = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-
-    hideInputError(formElement, inputElement);
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && document.querySelector('.popup_active')) {
+    const el = document.querySelector('.popup_active')
+    closePopup(el)
   }
-};
+});
 
-
-const setEventListeners = (formElement) => {
-  // Находим все поля внутри формы,
-  // сделаем из них массив методом Array.from
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-
-  inputList.forEach((inputElement) => {
-    // каждому полю добавим обработчик события input
-    inputElement.addEventListener('input', () => {
-      // Внутри колбэка вызовем isValid,
-      // передав ей форму и проверяемый элемент
-      isValid(formElement, inputElement)
-    });
-  });
-};
-
-
-const enableValidation = () => {
-  // Найдём все формы с указанным классом в DOM,
-  // сделаем из них массив методом Array.from
-  const formList = Array.from(document.querySelectorAll('.popup__wrapper'));
-
-  // Переберём полученную коллекцию
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (evt) => {
-      // У каждой формы отменим стандартное поведение
-      evt.preventDefault();
-    });
-
-    // Для каждой формы вызовем функцию setEventListeners,
-    // передав ей элемент формы
-    setEventListeners(formElement);
-  });
-};
-
-// Вызовем функцию
-enableValidation();
+//-----------------------
 
 
 
-//----------------------------------------------------------------------------
 
-// $(document).mouseup(function (e) {
-//   var container = $("YOUR CONTAINER SELECTOR");
-//   if (container.has(e.target).length === 0){
-//       container.hide();
-//   }
-// });
-
-
-
-// document.addEventListener('click',  (e) => {
-// const container = e.composedPath().includes(editFormWrapper);
-// if ( ! container ) {
-//   editFormWrapper.classList.remove('popup_active');
-// }
-// })
-
-
-// popupOverlay.forEach((el) => {
-//   el.addEventListener('click', () => {
-//     el.classList.remove('popup_active');
-//   })
-// })
-
-
-// popupOverlay.addEventListener('keydown', function (evt) {
-//   if (evt.key === '27') {
-//    console.log(evt);
-//  }
-
-// })
-// popupOverlay.forEach((el) => {
-//   el.addEventListener('keydown', (evt) => {
-//     if (evt.key === 'Escape') {
-//       console.log(evt);
-//     el.classList.remove('popup_active');
-//     }
-//   })
-// })
-
-
-
-// function keyHandler(evt) {
-//   if (evt.key === 'Enter') {
-//     editFormWrapper.classList.remove('popup_active');
-//   }
-// }
 

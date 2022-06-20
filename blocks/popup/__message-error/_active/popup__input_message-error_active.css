@@ -1,3 +1,9 @@
 .popup__message-error_active {
   color: rgba(255, 0, 0, 1);
 }
+
+@media screen and (max-width: 574px) {
+  .popup__message-error_active {
+
+  }
+}

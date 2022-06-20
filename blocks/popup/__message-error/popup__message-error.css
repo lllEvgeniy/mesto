@@ -4,5 +4,12 @@
   font-size: 12px;
   line-height: 15px;
   margin: 5px 0 0px 36px;
-  height: 21px;
+  height: 27px;
+}
+
+@media screen and (max-width: 574px) {
+  .popup__message-error {
+    margin: 5px 0 9px 36px;
+    max-width: 230px;
+  }
 }

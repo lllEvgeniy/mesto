@@ -26,11 +26,8 @@ const popupContainer = document.querySelectorAll('.popup__container')
 
 // открытие попапа
 function openPopup(elem) {
-
   elem.classList.add('popup_active');
-
   document.addEventListener('keydown', closeEscape)
-
 }
 
 //закрытие по кнопке
@@ -41,7 +38,7 @@ function closeEscape(elem) {
   }
 }
 
-// Закрытие попапа
+// // Закрытие попапа
 
 function closePopup(elem) {
   elem.classList.remove('popup_active');
@@ -50,10 +47,6 @@ function closePopup(elem) {
 
 closeBtnEditForm.addEventListener('click', function () {
   closePopup(editForm)
-});
-
-closeBtnImgPopup.addEventListener('click', function () {
-  closePopup(imgPopup)
 });
 
 closeBtnCardForm.addEventListener('click', function () {
@@ -77,57 +70,11 @@ editFormWrapper.addEventListener('submit', function (event) {
   closePopup(editForm);
 });
 
-// Удаления карточки
-
-function handleDeleteCard(evt) {
-  evt.target.closest('.element').remove()
-}
-
 // Открытие формы добавления карточки
 
 addButton.addEventListener('click', function () {
   openPopup(newCardForm);
 });
-
-// Создание карточек
-
-function createCard(cardData) {
-  const cloneCard = cardTemplate.cloneNode(true);
-  const likeElement = cloneCard.querySelector('.element__like');
-  const elementImg = cloneCard.querySelector('.element__img')
-  const elementTitle = cloneCard.querySelector('.element__title');
-  const trashElement = cloneCard.querySelector('.element__trash');
-  elementTitle.textContent = cardData.name
-  elementImg.src = cardData.link
-  elementImg.alt = cardData.name
-  likeElement.addEventListener('click', function () {
-    likeElement.classList.toggle('element__like_active');
-  })
-  trashElement.addEventListener('click', handleDeleteCard)
-  elementImg.addEventListener('click', function () {
-    imgPopupImage.src = elementImg.src
-    imgPopupTitle.textContent = elementTitle.textContent
-    imgPopupImage.alt = elementTitle.textContent
-    openPopup(imgPopup)
-  });
-  return cloneCard;
-}
-
-function renderCard(cardData) {
-  const cloneCard = createCard(cardData);
-  elements.prepend(cloneCard);
-}
-
-addCard.addEventListener('submit', function (event) {
-  event.preventDefault();
-  renderCard({ name: titleNewPlace.value, link: linkNewPlace.value });
-  addCard.reset();
-  closePopup(newCardForm);
-  enableValidation(false);
-})
-
-// создание первых 6 карточек
-initialCards.forEach(renderCard)
 
 // закрытие вне дива
 popup.forEach((el) => {
@@ -141,9 +88,28 @@ popup.forEach((el) => {
 })
 
 
+import { DefaultCard, AddCard} from './Card.js'
 
 
 
 
+initialCards.forEach((item) => {
+  const card = new DefaultCard(item, '#user');
+  const cardElement = card.generateCard();
+  document.querySelector('.elements').append(cardElement);
+});
 
 
+function renderCard(cardData) {
+  const card = new AddCard (cardData, '#user');
+  const cardElement = card.generateCard();
+  document.querySelector('.elements').prepend(cardElement);
+}
+
+addCard.addEventListener('submit', function (event) {
+  event.preventDefault();
+  renderCard({ name: titleNewPlace.value, link: linkNewPlace.value });
+  addCard.reset();
+  closePopup(newCardForm);
+  //enableValidation(false);
+})

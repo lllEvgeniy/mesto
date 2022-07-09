@@ -2,16 +2,11 @@ const popupElement = document.querySelector('.popup_type_image');
 const popupImage = document.querySelector('.popup__image');
 const popupCloseButton = document.querySelector('.popup__close_img');
 const popupSignature = document.querySelector('.popup__signature');
-const newCardForm = document.querySelector('.popup_form_edit-pictures');
-const addCard = newCardForm.querySelector('.popup__wrapper');
-const namePlaceInput = newCardForm.querySelector('.popup__input_title');
-const linkPlaceInput = newCardForm.querySelector('.popup__input_link');
 
 class Card {
     constructor(cardSelector) {
         this._cardSelector = cardSelector;
     }
-
 
     _getTemplate() {
         const cardElement = document
@@ -29,7 +24,6 @@ class Card {
         popupElement.classList.add('popup_active');
     }
 
-
     _handleClosePopup() {
         popupElement.classList.remove('popup_active');
     }
@@ -41,8 +35,6 @@ class Card {
     _handleLikeCard(el) {
         el.classList.toggle('element__like_active');
     }
-
-
 
     _setEventListeners() {
         this._element.querySelector('.element__img').addEventListener('click', () => {
@@ -60,14 +52,8 @@ class Card {
         this._element.querySelector('.element__like').addEventListener('click', () => {
             this._handleLikeCard(this._element.querySelector('.element__like'))
         });
-
-
     }
-
-
 }
-
-
 
 class DefaultCard extends Card {
     constructor(data, cardSelector) {
@@ -85,7 +71,6 @@ class DefaultCard extends Card {
     }
 }
 
-
 class AddCard extends Card {
     constructor(cardData, cardSelector) {
         super(cardSelector);
@@ -100,22 +85,6 @@ class AddCard extends Card {
         this._setEventListeners();
         return this._element;
     }
-
 }
 
-
 export { DefaultCard, AddCard }
-
-
-// function renderCard(cardData) {
-//   const cloneCard = createCard(cardData);
-//   elements.prepend(cloneCard);
-// }
-
-// addCard.addEventListener('submit', function (event) {
-//   event.preventDefault();
-//   renderCard({ name: titleNewPlace.value, link: linkNewPlace.value });
-//   addCard.reset();
-//   closePopup(newCardForm);
-//   enableValidation(false);
-// })

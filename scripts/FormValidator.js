@@ -1,6 +1,6 @@
 class FormValidator {
     constructor(config, formValid) {
-        this._inputList = config.inputList;
+        this._inputLists = config.inputLists;
         this._errorMessage = config.errorMessage //.popup__message-error_ nooot
         this._inputTypeError = config.inputTypeError
         this._messageErrorActive = config.messageErrorActive
@@ -54,7 +54,7 @@ class FormValidator {
     }
 
     _setEventListeners() {
-        this._inputList.forEach((inputElement) => {
+        this._inputLists.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
                 this._handleIsValid(inputElement)
                 this._handleToggleButtonState(inputElement)

@@ -1,11 +1,11 @@
-const popupElement = document.querySelector('.popup_type_image');
 const popupImage = document.querySelector('.popup__image');
-const popupCloseButton = document.querySelector('.popup__close_img');
 const popupSignature = document.querySelector('.popup__signature');
 
 class Card {
-    constructor(cardSelector) {
+    constructor(data, cardSelector) {
         this._cardSelector = cardSelector;
+        this._name = data.name;
+        this._link = data.link;
     }
 
     _getTemplate() {
@@ -21,11 +21,7 @@ class Card {
         popupImage.src = this._link;
         popupImage.alt = this._name
         popupSignature.textContent = this._name
-        popupElement.classList.add('popup_active');
-    }
 
-    _handleClosePopup() {
-        popupElement.classList.remove('popup_active');
     }
 
     _handleRemoveCard(el) {
@@ -41,9 +37,6 @@ class Card {
             this._handleOpenPopup()
         });
 
-        popupCloseButton.addEventListener('click', () => {
-            this._handleClosePopup()
-        });
 
         this._element.querySelector('.element__trash').addEventListener('click', () => {
             this._handleRemoveCard(this._element.querySelector('.element__trash'))
@@ -53,33 +46,9 @@ class Card {
             this._handleLikeCard(this._element.querySelector('.element__like'))
         });
     }
-}
-
-class DefaultCard extends Card {
-    constructor(data, cardSelector) {
-        super(cardSelector);
-        this._name = data.name;
-        this._link = data.link;
-    }
 
     generateCard() {
-        this._element = super._getTemplate();
-        super._setEventListeners();
-        this._element.querySelector('.element__img').src = `${this._link}`;
-        this._element.querySelector('.element__title').textContent = this._name;
-        return this._element;
-    }
-}
-
-class AddCard extends Card {
-    constructor(cardData, cardSelector) {
-        super(cardSelector);
-        this._name = cardData.name;
-        this._link = cardData.link;
-    }
-
-    generateCard() {
-        this._element = super._getTemplate();
+        this._element = this._getTemplate();
         this._element.querySelector('.element__img').src = `${this._link}`;
         this._element.querySelector('.element__title').textContent = this._name;
         this._setEventListeners();
@@ -87,4 +56,4 @@ class AddCard extends Card {
     }
 }
 
-export { DefaultCard, AddCard }
+export { Card }

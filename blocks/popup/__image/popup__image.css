@@ -3,6 +3,7 @@
   max-height: 75vh;
   z-index: 100;
   object-fit: contain;
+
 }
 
 @media screen and (max-width: 574px) {

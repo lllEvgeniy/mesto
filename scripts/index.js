@@ -121,7 +121,7 @@ cardAdd.addEventListener('submit', function (event) {
   addCardPrepend(createCard(elem))
   cardAdd.reset();
   closePopup(newCardForm);
-  validity._handleToggleButtonState(titleNewPlace)
+  validity.handleToggleButtonState(titleNewPlace)
 })
 
 const validity = new FormValidator(config, formValid);

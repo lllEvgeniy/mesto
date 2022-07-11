@@ -2,25 +2,26 @@ import { Card } from './Card.js'
 import { FormValidator } from './FormValidator.js'
 
 const formEdit = document.querySelector('.popup_form_edit-profile');
-const buttonEdit = document.querySelector('.profile__edit-button');  //editButton
-const formEditName = document.querySelector('.popup__input_name');  //editFormName
+const buttonEdit = document.querySelector('.profile__edit-button');
+const formEditName = document.querySelector('.popup__input_name');
 const profileName = document.querySelector('.profile__name');
 const profileOccupation = document.querySelector('.profile__occupation');
-const formEditOccupation = formEdit.querySelector('.popup__input_occupation'); //editFormOccupation
-const formEditWrapper = document.querySelector('.popup__wrapper'); //editFormWrapper
+const formEditOccupation = formEdit.querySelector('.popup__input_occupation');
+const formEditWrapper = document.querySelector('.popup__wrapper');
 const newCardForm = document.querySelector('.popup_form_edit-pictures');
-const cardAdd = newCardForm.querySelector('.popup__wrapper'); //addCard
+const cardAdd = newCardForm.querySelector('.popup__wrapper');
 const titleNewPlace = newCardForm.querySelector('.popup__input_title');
 const linkNewPlace = newCardForm.querySelector('.popup__input_link');
-const btnCloseFormEdit = formEdit.querySelector('.popup__close');  //closeBtnEditForm
-const btnCloseFormCard = newCardForm.querySelector('.popup__close'); // closeBtnCardForm
-const buttonAdd = document.querySelector('.profile__add-button'); // addButton
-const popups = document.querySelectorAll('.popup');  /////////
+const btnCloseFormEdit = formEdit.querySelector('.popup__close');
+const btnCloseFormCard = newCardForm.querySelector('.popup__close');
+const buttonAdd = document.querySelector('.profile__add-button');
+const popups = document.querySelectorAll('.popup');
 const formValid = { popup: '.popup__wrapper' }
-const inputLists = Array.from(document.querySelectorAll('.popup__input')); /////////////
+const inputLists = Array.from(document.querySelectorAll('.popup__input'));
 const popupCloseButton = document.querySelector('.popup__close_img');
 const popupTypeImage = document.querySelector('.popup_type_image');
-const element = document.querySelector('.elements')
+const element = document.querySelector('.elements');
+
 
 const config = {
   errorMessage: '.popup__message-error_',
@@ -100,43 +101,35 @@ popups.forEach((el) => {
   })
 })
 
-initialCards.forEach((item) => {
-  const card = new Card(item, '#user');
-  const cardElement = card.generateCard();
-  AddCardAppend(cardElement)
+initialCards.forEach((elem) => {
+  addCardPrepend(createCard(elem))
 });
 
-function AddCardAppend(elem) {
-  element.append(elem);
-}
-
-
-
-function renderCard(cardData) {
-  const card = new Card(cardData, '#user');
+function createCard(elem) {
+  const card = new Card(elem, '#user');
   const cardElement = card.generateCard();
-  AddCardPrepend(cardElement)
-
+  return cardElement
 }
 
-function AddCardPrepend(elem) {
+function addCardPrepend(elem) {
   element.prepend(elem);
 }
 
 cardAdd.addEventListener('submit', function (event) {
   event.preventDefault();
-  renderCard({ name: titleNewPlace.value, link: linkNewPlace.value });
+  const elem = ({ name: titleNewPlace.value, link: linkNewPlace.value });
+  addCardPrepend(createCard(elem))
   cardAdd.reset();
   closePopup(newCardForm);
+  validity._handleToggleButtonState(titleNewPlace)
 })
 
 const validity = new FormValidator(config, formValid);
 validity.enableValidation();
 
+const elemenstImg = document.querySelectorAll('.element__img');
 
-const elementImg = document.querySelectorAll('.element__img');
-
-elementImg.forEach((item) => {
+elemenstImg.forEach((item) => {
   item.addEventListener('click', function () {
     openPopup(popupTypeImage)
   })

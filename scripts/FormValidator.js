@@ -19,6 +19,7 @@ class FormValidator {
     }
 
     _handleToggleButtonState(inputElement) {
+
         const buttonElement = inputElement.closest(this._popup).querySelector(this._btn)
         const inputForms = Array.from(buttonElement.closest(this._popup).querySelectorAll(this._popupInput));
         if (this._handleHasInvalidInput(inputForms)) {

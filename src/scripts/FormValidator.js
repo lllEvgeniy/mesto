@@ -8,7 +8,6 @@ class FormValidator {
         this._popupInput = config.popupInput
         this.btnDisabled = config.btnDisabled
 
-
         this._popup = formValid.popup;
     }
 
@@ -18,8 +17,7 @@ class FormValidator {
         })
     }
 
-    _handleToggleButtonState(inputElement) {
-
+    handleToggleButtonState(inputElement) {
         const buttonElement = inputElement.closest(this._popup).querySelector(this._btn)
         const inputForms = Array.from(buttonElement.closest(this._popup).querySelectorAll(this._popupInput));
         if (this._handleHasInvalidInput(inputForms)) {
@@ -58,7 +56,7 @@ class FormValidator {
         this._inputLists.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
                 this._handleIsValid(inputElement)
-                this._handleToggleButtonState(inputElement)
+                this.handleToggleButtonState(inputElement)
             })
         });
     }

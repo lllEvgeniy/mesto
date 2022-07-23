@@ -6,14 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body>
   <div class="page">
     <header class="header">
       <a class="header__logo" href="#">
-        <img class="header__img" src="./img/Vector.svg" alt="Логотип Mesto">
+        <img class="header__img" src="<%=require('./img/Vector.svg')%>" alt="Логотип Mesto">
       </a>
     </header>
     <main class="content">
@@ -78,8 +77,8 @@
         <form name="newPlace" class="popup__wrapper">
           <h2 class="popup__title">Новое место</h2>
           <input minlength="2" maxlength="30" class="popup__input popup__input_title" required placeholder="Название"
-            name="title" type="text">
-          <span class="popup__message-error popup__message-error_title">Вы пропустили это поле.</span>
+            name="name" type="text">
+          <span class="popup__message-error popup__message-error_name">Вы пропустили это поле.</span>
           <input required placeholder="Ссылка на картинку" name="link" type="url"
             class="popup__input popup__input_link">
           <span class="popup__message-error popup__message-error_link">Вы пропустили это поле.</span>

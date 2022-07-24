@@ -19,13 +19,6 @@ class Card {
         return cardElement;
     }
 
-    _handleOpenPopupImg() {
-        popupImage.src = this._link;
-        popupImage.alt = this._name
-        popupSignature.textContent = this._name
-
-    }
-
     _handleRemoveCard(el) {
         el.closest('.element').remove()
     }

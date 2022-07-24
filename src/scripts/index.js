@@ -5,7 +5,9 @@ import Popup from './Popup.js'
 import PopupWithForm from './PopupWithForm.js'
 import UserInfo from './UserInfo.js'
 import PopupWithImage from './PopupWithImage.js'
+import { initialCards } from './cards.js'
 import '../pages/index.css'
+
 
 const formEdit = document.querySelector('.popup_form_edit-profile');
 const buttonEdit = document.querySelector('.profile__edit-button');

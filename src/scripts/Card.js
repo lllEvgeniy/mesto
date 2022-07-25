@@ -1,6 +1,3 @@
-const popupImage = document.querySelector('.popup__image');
-const popupSignature = document.querySelector('.popup__signature');
-
 class Card {
     constructor(data, cardSelector, openPopupImg) {
         this._cardSelector = cardSelector;
@@ -19,12 +16,12 @@ class Card {
         return cardElement;
     }
 
-    _handleRemoveCard(el) {
-        el.closest('.element').remove()
+    _handleRemoveCard() {
+        this._element.remove()
     }
 
-    _handleLikeCard(el) {
-        el.classList.toggle('element__like_active');
+    _handleLikeCard() {
+        this._element.querySelector('.element__like').classList.toggle('element__like_active');
     }
 
     _setEventListeners() {
@@ -34,11 +31,11 @@ class Card {
 
 
         this._element.querySelector('.element__trash').addEventListener('click', () => {
-            this._handleRemoveCard(this._element.querySelector('.element__trash'))
+            this._handleRemoveCard()
         });
 
         this._element.querySelector('.element__like').addEventListener('click', () => {
-            this._handleLikeCard(this._element.querySelector('.element__like'))
+            this._handleLikeCard()
         });
     }
 

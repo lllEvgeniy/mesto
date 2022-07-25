@@ -1,27 +1,17 @@
 import { Card } from './Card.js'
 import { FormValidator } from './FormValidator.js'
 import Section from './Section.js'
-import Popup from './Popup.js'
 import PopupWithForm from './PopupWithForm.js'
 import UserInfo from './UserInfo.js'
 import PopupWithImage from './PopupWithImage.js'
-import { initialCards } from './cards.js'
+import { initialCards } from '../utils/cards.js'
 import '../pages/index.css'
+import {
+  buttonEdit, formEditName, formEditOccupation, newCardForm, buttonAdd, formsValid, inputLists, titleNewPlace, profileName, profileOccupation,
+} from '../utils/const.js'
 
 
-const formEdit = document.querySelector('.popup_form_edit-profile');
-const buttonEdit = document.querySelector('.profile__edit-button');
-const formEditName = document.querySelector('.popup__input_name');
-const profileName = document.querySelector('.profile__name');
-const profileOccupation = document.querySelector('.profile__occupation');
-const formEditOccupation = formEdit.querySelector('.popup__input_occupation');
-const newCardForm = document.querySelector('.popup_form_edit-pictures');
-const buttonAdd = document.querySelector('.profile__add-button');
-const formValid = { popup: '.popup__wrapper' }
-const inputLists = Array.from(document.querySelectorAll('.popup__input'));
-const titleNewPlace = document.querySelector('.popup__input_title');
 const objSelector = ({ title: profileName, subtitle: profileOccupation })
-
 const config = {
   errorMessage: '.popup__message-error_',
   inputLists: inputLists,
@@ -31,10 +21,18 @@ const config = {
   btn: '.popup__btn',
   popupInput: '.popup__input',
   btnDisabled: 'popup__btn_disabled',
+  popup: '.popup__wrapper'
 }
 
-const validity = new FormValidator(config, formValid);
 
+
+const abs = () => {
+  formsValid.forEach((formValid) => {
+    const validity = new FormValidator(config, formValid);
+    validity.handleToggleButtonState()
+    validity.enableValidation();
+  })
+}
 const cardListSelector = '.elements';
 
 const cards = new Section({
@@ -56,36 +54,42 @@ const createCard = (item) => {
 const userInfo = new UserInfo(objSelector)
 
 const popupFormEdit = new PopupWithForm({
-  popupSelector: '.popup_form_edit-profile',
+  selector: '.popup_form_edit-profile',
   handleFormSubmit: (formData) => {
     userInfo.setUserInfo(formData)
     popupFormEdit.close
   }
 })
 
+
+
 const popupNewPlace = new PopupWithForm({
-  popupSelector: '.popup_form_edit-pictures',
+  selector: '.popup_form_edit-pictures',
   handleFormSubmit: (formData) => {
-   const card = createCard(formData)
+    const card = createCard(formData)
     cards.addItem(card);
   }
 })
 
+
+
 const popupWithImage = new PopupWithImage({
-  popupSelector: '.popup_type_image',
+  selector: '.popup_type_image',
 })
+
+
 
 const openPopupImg = (title, link) => {
   popupWithImage.openPopup(title, link)
 }
-
+const popupwr = document.querySelector('.popupWrapper')
 buttonAdd.addEventListener('click', function () {
-  validity.handleToggleButtonState(titleNewPlace)
+  abs(popupwr)
   popupNewPlace.openPopup(newCardForm);
 });
 
 buttonEdit.addEventListener('click', function () {
-  validity.handleToggleButtonState(formEditName)
+  abs()
   const data = userInfo.getUserInfo()
   formEditName.value = data.title
   formEditOccupation.value = data.subtitle
@@ -94,5 +98,8 @@ buttonEdit.addEventListener('click', function () {
 });
 
 
-validity.enableValidation();
+
 cards.renderItems();
+popupFormEdit.setEventListeners()
+popupNewPlace.setEventListeners()
+popupWithImage.setEventListeners()

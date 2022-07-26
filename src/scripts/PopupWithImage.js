@@ -2,8 +2,8 @@ import Popup from './Popup.js'
 export default class PopupWithImage extends Popup {
     constructor({ selector }) {
         super(selector)
-        this.popupImg = this.popupSelector.querySelector('.popup__image')
-        this.popupSignature = this.popupSelector.querySelector('.popup__signature')
+        this.popupImg = this.popup.querySelector('.popup__image')
+        this.popupSignature = this.popup.querySelector('.popup__signature')
 
     }
 

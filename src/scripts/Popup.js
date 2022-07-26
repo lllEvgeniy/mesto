@@ -1,16 +1,22 @@
 export default class Popup {
     constructor(selector) {
-        this.popupSelector = document.querySelector(selector);
-        this.popupCloseButton = this.popupSelector.querySelector('.popup__close')
+        this.popup = document.querySelector(selector);
+        this.popupCloseButton = this.popup.querySelector('.popup__close')
     }
 
 
     openPopup() {
-        this.popupSelector.classList.add('popup_active');
+        this.popup.classList.add('popup_active');
+        document.addEventListener('keydown', (event) => {
+            this._handleEscClose(event)
+        })
     }
 
     closePopup() {
-        this.popupSelector.classList.remove('popup_active');
+        this.popup.classList.remove('popup_active');
+        document.removeEventListener('keydown', (event) => {
+            this._handleEscClose(event)
+        })
     }
 
     _handleEscClose(event) {
@@ -22,19 +28,17 @@ export default class Popup {
 
 
         this.popupCloseButton.addEventListener('click', () => {
-            this.closePopup(this.popupSelector)
-        })
-
-        document.addEventListener('keydown', (event) => {
-            this._handleEscClose(event)
+            this.closePopup(this.popup)
         })
 
 
-        this.popupSelector.addEventListener('mousedown', (e) => {
-            const container = this.popupSelector.querySelector('.popup__container')
+
+
+        this.popup.addEventListener('mousedown', (e) => {
+            const container = this.popup.querySelector('.popup__container')
             const click = e.composedPath().includes(container);
             if (!click) {
-                this.closePopup(this.popupSelector)
+                this.closePopup(this.popup)
             }
         })
     }

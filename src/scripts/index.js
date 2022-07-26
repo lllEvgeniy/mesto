@@ -26,7 +26,7 @@ const config = {
 
 
 
-const abs = () => {
+const enableValidation = () => {
   formsValid.forEach((formValid) => {
     const validity = new FormValidator(config, formValid);
     validity.handleToggleButtonState()
@@ -82,14 +82,13 @@ const popupWithImage = new PopupWithImage({
 const openPopupImg = (title, link) => {
   popupWithImage.openPopup(title, link)
 }
-const popupwr = document.querySelector('.popupWrapper')
 buttonAdd.addEventListener('click', function () {
-  abs(popupwr)
+  enableValidation()
   popupNewPlace.openPopup(newCardForm);
 });
 
 buttonEdit.addEventListener('click', function () {
-  abs()
+  enableValidation()
   const data = userInfo.getUserInfo()
   formEditName.value = data.title
   formEditOccupation.value = data.subtitle

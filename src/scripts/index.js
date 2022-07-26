@@ -7,7 +7,7 @@ import PopupWithImage from './PopupWithImage.js'
 import { initialCards } from '../utils/cards.js'
 import '../pages/index.css'
 import {
-  buttonEdit, formEditName, formEditOccupation, newCardForm, buttonAdd, formsValid, inputLists, titleNewPlace, profileName, profileOccupation, formsValids,
+  buttonEdit, formEditName, formEditOccupation, newCardForm, buttonAdd, formsValid, inputLists, profileName, profileOccupation,
 } from '../utils/const.js'
 
 const objSelector = ({ title: profileName, subtitle: profileOccupation })
@@ -95,7 +95,6 @@ buttonEdit.addEventListener('click', function () {
   const data = userInfo.getUserInfo()
   formEditName.value = data.title
   formEditOccupation.value = data.subtitle
-
   popupFormEdit.openPopup();
 
 });

@@ -58,7 +58,7 @@
     <div class="popup popup_form_edit-profile">
       <div class="popup__container">
         <button type="button" class="popup__close"></button>
-        <form novalidate name="editProfile" class="popup__wrapper">
+        <form id="editProfile" novalidate name="editProfile" class="popup__wrapper">
           <h2 class="popup__title">Редактировать профиль</h2>
           <input minlength="2" maxlength="40" required class="popup__input popup__input_name"
             placeholder="Введите ваше имя" name="name" type="text">
@@ -74,7 +74,7 @@
     <div class="popup popup_form_edit-pictures">
       <div class="popup__container">
         <button type="button" class="popup__close"></button>
-        <form name="newPlace" class="popup__wrapper">
+        <form id="newPlace" name="newPlace" class="popup__wrapper">
           <h2 class="popup__title">Новое место</h2>
           <input minlength="2" maxlength="30" class="popup__input popup__input_title" required placeholder="Название"
             name="name" type="text">
@@ -89,12 +89,6 @@
 
 
   </div>
-
-<!--
-  <script src="./scripts/cards.js"></script>
-  <script type="module" src="./scripts/index.js"></script>
-  <script type="module" src="./scripts/Card.js"></script>
-  <script type="module" src="./scripts/FormValidator.js"></script> -->
 </body>
 
 </html>

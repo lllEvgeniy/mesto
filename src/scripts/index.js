@@ -7,9 +7,8 @@ import PopupWithImage from './PopupWithImage.js'
 import { initialCards } from '../utils/cards.js'
 import '../pages/index.css'
 import {
-  buttonEdit, formEditName, formEditOccupation, newCardForm, buttonAdd, formsValid, inputLists, titleNewPlace, profileName, profileOccupation,
+  buttonEdit, formEditName, formEditOccupation, newCardForm, buttonAdd, formsValid, inputLists, titleNewPlace, profileName, profileOccupation, formsValids,
 } from '../utils/const.js'
-
 
 const objSelector = ({ title: profileName, subtitle: profileOccupation })
 const config = {
@@ -25,14 +24,16 @@ const config = {
 }
 
 
+const enableValidation = {};
 
-const enableValidation = () => {
-  formsValid.forEach((formValid) => {
-    const validity = new FormValidator(config, formValid);
-    validity.handleToggleButtonState()
-    validity.enableValidation();
-  })
-}
+formsValid.forEach((formValid) => {
+  const validity = new FormValidator(config, formValid);
+  const formId = formValid.id
+  enableValidation[formId] = validity
+  validity.enableValidation();
+})
+
+
 const cardListSelector = '.elements';
 
 const cards = new Section({
@@ -82,16 +83,19 @@ const popupWithImage = new PopupWithImage({
 const openPopupImg = (title, link) => {
   popupWithImage.openPopup(title, link)
 }
+
+
 buttonAdd.addEventListener('click', function () {
-  enableValidation()
+  enableValidation.newPlace.handleToggleButtonState()
   popupNewPlace.openPopup(newCardForm);
 });
 
 buttonEdit.addEventListener('click', function () {
-  enableValidation()
+  enableValidation.editProfile.handleToggleButtonState()
   const data = userInfo.getUserInfo()
   formEditName.value = data.title
   formEditOccupation.value = data.subtitle
+
   popupFormEdit.openPopup();
 
 });

@@ -9,4 +9,4 @@ export const buttonAdd = document.querySelector('.profile__add-button');
 export const formsValid = document.querySelectorAll('.popup__wrapper')
 
 export const inputLists = Array.from(document.querySelectorAll('.popup__input'));
-export const titleNewPlace = document.querySelector('.popup__input_title');
+export const profileAvatar = document.querySelector('.profile__avatar');

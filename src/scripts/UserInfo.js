@@ -4,8 +4,6 @@ export default class UserInfo {
     constructor(objSelector) {
         this.title = objSelector.title
         this.subtitle = objSelector.subtitle
-
-
     }
 
     getUserInfo() {

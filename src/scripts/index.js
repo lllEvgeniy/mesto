@@ -7,7 +7,7 @@ import PopupWithImage from './PopupWithImage.js'
 import { initialCards } from '../utils/cards.js'
 import '../pages/index.css'
 import {
-  buttonEdit, formEditName, formEditOccupation, newCardForm, buttonAdd, formsValid, inputLists, profileName, profileOccupation,
+  buttonEdit, formEditName, formEditOccupation, newCardForm, buttonAdd, formsValid, inputLists, profileName, profileOccupation, profileAvatar,
 } from '../utils/const.js'
 
 const objSelector = ({ title: profileName, subtitle: profileOccupation })
@@ -23,6 +23,17 @@ const config = {
   popup: '.popup__wrapper'
 }
 
+function requestGet (entity, entityId) {
+ return fetch(`https://nomoreparties.co/v1/cohort-47/${entity}${entityId}`, {
+    headers: {
+      authorization: '35932558-7da7-4b8a-bea3-eca911965720'
+    }
+  })
+  .then(res => res.json())
+}
+
+
+
 
 const enableValidation = {};
 
@@ -36,8 +47,21 @@ formsValid.forEach((formValid) => {
 
 const cardListSelector = '.elements';
 
+
+// then(data => {
+//   console.log(data[0].msg1);
+//   console.log(data[1].msg2);
+//   console.log(data[2].msg3);
+// })
+
+
+
 const cards = new Section({
-  items: initialCards,
+
+  items: requestGet('cards', '')
+  .then(data => {
+  return data
+  }),
   renderer: (item) => {
     const card = createCard(item)
     cards.addItem(card)
@@ -57,12 +81,12 @@ const userInfo = new UserInfo(objSelector)
 const popupFormEdit = new PopupWithForm({
   selector: '.popup_form_edit-profile',
   handleFormSubmit: (formData) => {
+    requestGet ('users', 'me')
+    .then
     userInfo.setUserInfo(formData)
     popupFormEdit.close
   }
 })
-
-
 
 const popupNewPlace = new PopupWithForm({
   selector: '.popup_form_edit-pictures',
@@ -72,18 +96,13 @@ const popupNewPlace = new PopupWithForm({
   }
 })
 
-
-
 const popupWithImage = new PopupWithImage({
   selector: '.popup_type_image',
 })
 
-
-
 const openPopupImg = (title, link) => {
   popupWithImage.openPopup(title, link)
 }
-
 
 buttonAdd.addEventListener('click', function () {
   enableValidation.newPlace.handleToggleButtonState()
@@ -99,9 +118,15 @@ buttonEdit.addEventListener('click', function () {
 
 });
 
-
-
 cards.renderItems();
 popupFormEdit.setEventListeners()
 popupNewPlace.setEventListeners()
 popupWithImage.setEventListeners()
+
+
+requestGet('users', '/me')
+.then((result) => {
+    profileAvatar.src = result.avatar
+    profileName.textContent = result.name
+    profileOccupation.textContent = result.about
+  })

@@ -23,14 +23,34 @@ const config = {
   popup: '.popup__wrapper'
 }
 
-function requestGet (entity, entityId) {
- return fetch(`https://nomoreparties.co/v1/cohort-47/${entity}${entityId}`, {
+async function requestGet(entity, entityId) {
+  const res = await fetch(`https://nomoreparties.co/v1/cohort-47/${entity}${entityId}`, {
     headers: {
-      authorization: '35932558-7da7-4b8a-bea3-eca911965720'
+      authorization: '35932558-7da7-4b8a-bea3-eca911965720',
     }
   })
-  .then(res => res.json())
+  return await res.json()
 }
+
+function requestPatch(name, about) {
+  fetch('https://mesto.nomoreparties.co/v1/cohort-47/users/me', {
+    method: 'PATCH',
+    headers: {
+      authorization: '35932558-7da7-4b8a-bea3-eca911965720',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: `${name}`,
+      about: `${about}`
+    })
+  }
+
+  )
+    .then(res => res.json())
+}
+
+
+
 
 
 
@@ -59,9 +79,9 @@ const cardListSelector = '.elements';
 const cards = new Section({
 
   items: requestGet('cards', '')
-  .then(data => {
-  return data
-  }),
+    .then(data => {
+      return data
+    }),
   renderer: (item) => {
     const card = createCard(item)
     cards.addItem(card)
@@ -81,8 +101,7 @@ const userInfo = new UserInfo(objSelector)
 const popupFormEdit = new PopupWithForm({
   selector: '.popup_form_edit-profile',
   handleFormSubmit: (formData) => {
-    requestGet ('users', 'me')
-    .then
+    requestPatch(formData.name, formData.occupation)
     userInfo.setUserInfo(formData)
     popupFormEdit.close
   }
@@ -125,7 +144,7 @@ popupWithImage.setEventListeners()
 
 
 requestGet('users', '/me')
-.then((result) => {
+  .then((result) => {
     profileAvatar.src = result.avatar
     profileName.textContent = result.name
     profileOccupation.textContent = result.about

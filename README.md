@@ -10,4 +10,4 @@ ___
 + ***Адаптивная верстка***
 + ***JavaScript***
 ___
-### **https://lllevgeniy.github.io/mesto/**
+## Cсылка на проект: **https://lllevgeniy.github.io/mesto/**

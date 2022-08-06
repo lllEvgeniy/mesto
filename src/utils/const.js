@@ -7,6 +7,7 @@ export const formEditOccupation = formEdit.querySelector('.popup__input_occupati
 export const newCardForm = document.querySelector('.popup_form_edit-pictures');
 export const buttonAdd = document.querySelector('.profile__add-button');
 export const formsValid = document.querySelectorAll('.popup__wrapper')
-
+export const elemenTrash = document.querySelector('.element__trash')
+export const popupFormDeleteCard = document.querySelector('.popup_form_delete-card')
 export const inputLists = Array.from(document.querySelectorAll('.popup__input'));
 export const profileAvatar = document.querySelector('.profile__avatar');

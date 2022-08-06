@@ -52,7 +52,7 @@ export default class Api {
             .then(this._getJsonOrError)
     }
 
-    deleteTask(id) {
+    deleteCard(id) {
         return fetch(`${this._host}/v1/cohort-47/cards/${id}`, {
             method: 'DELETE',
             headers: this._getHeaders(),

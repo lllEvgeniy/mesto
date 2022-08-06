@@ -7,8 +7,9 @@ import PopupWithImage from './PopupWithImage.js'
 import Api from './Api.js'
 import '../pages/index.css'
 import {
-  buttonEdit, formEditName, formEditOccupation, newCardForm, buttonAdd, formsValid, inputLists, profileName, profileOccupation, profileAvatar,
+  buttonEdit, formEditName, formEditOccupation, newCardForm, buttonAdd, formsValid, inputLists, profileName, profileOccupation, profileAvatar, popupFormDeleteCard,
 } from '../utils/const.js'
+import PopupWithDeleteCard from './PopupWithDeleteCard.js'
 
 const objSelector = ({ title: profileName, subtitle: profileOccupation })
 const config = {
@@ -89,6 +90,11 @@ const popupNewPlace = new PopupWithForm({
   }
 })
 
+export const popupDeleteCard = new PopupWithDeleteCard(
+  '.popup_form_delete-card',
+)
+
+
 const popupWithImage = new PopupWithImage({
   selector: '.popup_type_image',
 })
@@ -108,13 +114,15 @@ buttonEdit.addEventListener('click', function () {
   formEditName.value = data.title
   formEditOccupation.value = data.subtitle
   popupFormEdit.openPopup();
-
 });
+
+
 
 cards.renderItems();
 popupFormEdit.setEventListeners()
 popupNewPlace.setEventListeners()
 popupWithImage.setEventListeners()
+popupDeleteCard.setEventListeners()
 
 api.getInfo('users', '/me')
   .then((result) => {
@@ -124,5 +132,5 @@ api.getInfo('users', '/me')
   })
 
 function deleteCard(id) {
-  return api.deleteTask(id)
+  return api.deleteCard(id)
 }

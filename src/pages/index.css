@@ -43,3 +43,6 @@
 @import url(../blocks/popup/__btn/_disabled/popup__btn_disabled.css);
 @import url(../blocks/element/__counter/element__counter.css);
 @import url(../blocks/element/__details/element__details.css);
+@import url(../blocks/popup/__container/popup__container_delete-card.css);
+@import url(../blocks/popup/__close/popup__close_delete-card.css);
+@import url(../blocks/popup/__btn/popup__btn_delete-card.css);

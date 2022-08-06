@@ -1,8 +1,12 @@
+import { data } from "autoprefixer";
+
 class Card {
-    constructor(data, cardSelector, openPopupImg) {
+    constructor(data, cardSelector, openPopupImg, removeCardFromServer) {
+        this._id = data._id
         this._cardSelector = cardSelector;
         this._name = data.name;
         this._link = data.link;
+        this._removeCardFromServer = removeCardFromServer
 
         this._openPopupImg = openPopupImg
     }
@@ -16,8 +20,15 @@ class Card {
         return cardElement;
     }
 
-    _handleRemoveCard() {
+   async _handleRemoveCard() {
+
+    try {
+        await  this._removeCardFromServer(this._id)
         this._element.remove()
+    } catch (error) {
+        console.log(error);
+    }
+
     }
 
     _handleLikeCard() {

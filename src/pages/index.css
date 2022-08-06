@@ -41,3 +41,5 @@
 @import url(../blocks/popup/__message-error/popup__message-error.css);
 @import url(../blocks/popup/__message-error/_active/popup__input_message-error_active.css);
 @import url(../blocks/popup/__btn/_disabled/popup__btn_disabled.css);
+@import url(../blocks/element/__counter/element__counter.css);
+@import url(../blocks/element/__details/element__details.css);

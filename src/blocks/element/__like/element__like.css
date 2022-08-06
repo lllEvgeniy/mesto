@@ -1,8 +1,9 @@
 .element__like {
   background: url(./../../../img/heart.svg) no-repeat;
-  width: 29px;
+  width: 22px;
   height: 19px;
   border: none;
+  padding: 0;
 }
 
 .element__like:hover {

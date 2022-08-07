@@ -8,7 +8,6 @@ export default class PopupWithDeleteCard extends Popup {
 
     setEventListeners() {
         this.popupBtn.addEventListener('click', () => {
-            console.log(this.popupBtn);
             this.closePopup(this.popup)
         })
         super.setEventListeners()

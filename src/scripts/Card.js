@@ -1,7 +1,10 @@
 import { popupFormDeleteCard } from "../utils/const.js";
-import { popupDeleteCard } from './index.js'
+import { popupDeleteCard, get } from './index.js';
+
 class Card {
-    constructor(data, cardSelector, openPopupImg, removeCardFromServer) {
+    constructor(data, cardSelector, openPopupImg, removeCardFromServer, get) {
+        this._get = get
+        this._ownerId = data.owner._id
         this._likes = data.likes
         this._id = data._id
         this._cardSelector = cardSelector;
@@ -21,15 +24,21 @@ class Card {
         return cardElement;
     }
 
-   async _handleRemoveCard() {
+    async _handleRemoveCard(el) {
 
-    try {
-        await  this._removeCardFromServer(this._id)
-        this._element.remove()
-    } catch (error) {
-        console.log(error);
+        try {
+            await this._removeCardFromServer(this._id)
+            el.remove()
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
+    _popupFormDeleteCard(el) {
+        popupFormDeleteCard.querySelector('.popup__btn').addEventListener('click', () => {
+            this._handleRemoveCard(el)
+        });
     }
 
     _handleLikeCard() {
@@ -42,9 +51,9 @@ class Card {
         });
 
 
+
         this._element.querySelector('.element__trash').addEventListener('click', () => {
-            popupDeleteCard.openPopup(popupFormDeleteCard);
-            // this._handleRemoveCard()
+            popupDeleteCard.openPopup(this._popupFormDeleteCard(this._element));
         });
 
         this._element.querySelector('.element__like').addEventListener('click', () => {
@@ -58,6 +67,11 @@ class Card {
         this._element.querySelector('.element__title').textContent = this._name;
         this._setEventListeners();
         this._element.querySelector('.element__counter').textContent = this._likes.length
+        if (this._ownerId == '9ed86b818f4ce3d5f1a6bc6a') {
+            const elTrash = this._element.querySelector('.element__trash')
+            elTrash.style.display = "block"
+        }
+
         return this._element;
     }
 }

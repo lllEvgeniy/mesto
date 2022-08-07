@@ -27,9 +27,18 @@ const config = {
   token: '35932558-7da7-4b8a-bea3-eca911965720'
 
 }
+export const api = new Api(config.host, config.token)
+
+export const get = api.getInfo('users', '/me')
+  .then((result) => {
+    profileAvatar.src = result.avatar
+    profileName.textContent = result.name
+    profileOccupation.textContent = result.about
+
+    return result
+  })
 
 
-const api = new Api(config.host, config.token)
 
 const enableValidation = {};
 
@@ -59,13 +68,22 @@ const cards = new Section({
 );
 
 
+
+
 const createCard = (item) => {
-  const card = new Card(item, '#user', openPopupImg, deleteCard);
+  const card = new Card(item, '#user', openPopupImg, deleteCard, get);
   const createdCard = card.generateCard();
   return createdCard;
 }
 
+// v.then(data => {
+//   console.log(data[0].msg1);
+//   console.log(data[1].msg2);
+//   console.log(data[2].msg3);
+// })
+
 const userInfo = new UserInfo(objSelector)
+
 
 const popupFormEdit = new PopupWithForm({
   selector: '.popup_form_edit-profile',
@@ -75,6 +93,7 @@ const popupFormEdit = new PopupWithForm({
     popupFormEdit.close
   }
 })
+
 
 const popupNewPlace = new PopupWithForm({
   selector: '.popup_form_edit-pictures',
@@ -124,12 +143,7 @@ popupNewPlace.setEventListeners()
 popupWithImage.setEventListeners()
 popupDeleteCard.setEventListeners()
 
-api.getInfo('users', '/me')
-  .then((result) => {
-    profileAvatar.src = result.avatar
-    profileName.textContent = result.name
-    profileOccupation.textContent = result.about
-  })
+
 
 function deleteCard(id) {
   return api.deleteCard(id)

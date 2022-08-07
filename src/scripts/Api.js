@@ -41,15 +41,20 @@ export default class Api {
         })
             .then(this._getJsonOrError)
     }
-
+    // где то здесь найти id юзера!!!!
 
     editProfile(name, about) {
         return fetch(`${this._host}/v1/cohort-47/users/me`, {
+
             method: 'PATCH',
             headers: this._getHeaders(),
             body: JSON.stringify({ name, about }),
         })
             .then(this._getJsonOrError)
+            .then((result) => {
+                id = result._id
+                return id
+            });
     }
 
     deleteCard(id) {
@@ -61,7 +66,6 @@ export default class Api {
     }
 
     checkTask(id, checked) {
-        console.log(id, checked);
         return fetch(`${this._host}/tasks/${id}`, {
             method: 'PATCH',
             headers: this._getHeaders(),

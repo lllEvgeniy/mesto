@@ -7,7 +7,7 @@ import PopupWithImage from './PopupWithImage.js'
 import Api from './Api.js'
 import '../pages/index.css'
 import {
-  buttonEdit, formEditName, formEditOccupation, newCardForm, buttonAdd, formsValid, inputLists, profileName, profileOccupation, profileAvatar, popupFormDeleteCard,
+  buttonEdit, formEditName, formEditOccupation, newCardForm, buttonAdd, formsValid, inputLists, profileName, profileOccupation, profileAvatar, profilePic,
 } from '../utils/const.js'
 import PopupWithDeleteCard from './PopupWithDeleteCard.js'
 
@@ -49,7 +49,6 @@ formsValid.forEach((formValid) => {
   validity.enableValidation();
 })
 
-
 const cardListSelector = '.elements';
 
 
@@ -71,16 +70,10 @@ const cards = new Section({
 
 
 const createCard = (item) => {
-  const card = new Card(item, '#user', openPopupImg, deleteCard, get);
+  const card = new Card(item, '#user', openPopupImg, deleteCard, get, checkTask);
   const createdCard = card.generateCard();
   return createdCard;
 }
-
-// v.then(data => {
-//   console.log(data[0].msg1);
-//   console.log(data[1].msg2);
-//   console.log(data[2].msg3);
-// })
 
 const userInfo = new UserInfo(objSelector)
 
@@ -101,13 +94,21 @@ const popupNewPlace = new PopupWithForm({
     api.createCard(formData.name, formData.link)
       .then((item) => {
         const card = createCard(item)
-        const elTrash = card.querySelector('.element__trash')
-        elTrash.style.display = "block"
         cards.addItem(card);
       })
 
   }
 })
+
+const popupEditAvatar = new PopupWithForm({
+  selector: '.popup_form_edit-avatar',
+  handleFormSubmit: (formData) => {
+    profileAvatar.src = formData.avatar
+    api.editAvatar(formData.avatar)
+    popupEditAvatar.close
+  }
+})
+
 
 export const popupDeleteCard = new PopupWithDeleteCard(
   '.popup_form_delete-card',
@@ -135,16 +136,23 @@ buttonEdit.addEventListener('click', function () {
   popupFormEdit.openPopup();
 });
 
-
+profilePic.addEventListener('click', function () {
+  enableValidation.editAvatar.handleToggleButtonState()
+  popupEditAvatar.openPopup();
+});
 
 cards.renderItems();
 popupFormEdit.setEventListeners()
 popupNewPlace.setEventListeners()
 popupWithImage.setEventListeners()
 popupDeleteCard.setEventListeners()
-
+popupEditAvatar.setEventListeners()
 
 
 function deleteCard(id) {
   return api.deleteCard(id)
+}
+
+function checkTask(id) {
+  return api.checkTask(id)
 }

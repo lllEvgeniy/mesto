@@ -1,0 +1,5 @@
+.popup__container_edit-avatar {
+  flex-direction: column;
+  width: 430px;
+  height: 272px;
+}

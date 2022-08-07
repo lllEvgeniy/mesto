@@ -41,7 +41,6 @@ export default class Api {
         })
             .then(this._getJsonOrError)
     }
-    // где то здесь найти id юзера!!!!
 
     editProfile(name, about) {
         return fetch(`${this._host}/v1/cohort-47/users/me`, {
@@ -52,8 +51,7 @@ export default class Api {
         })
             .then(this._getJsonOrError)
             .then((result) => {
-                id = result._id
-                return id
+                return result._id
             });
     }
 
@@ -65,13 +63,25 @@ export default class Api {
             .then(this._getJsonOrError)
     }
 
-    checkTask(id, checked) {
-        return fetch(`${this._host}/tasks/${id}`, {
-            method: 'PATCH',
+    checkTask(id) {
+        return fetch(`${this._host}/v1/cohort-47/cards/${id}/likes`, {
+            method: 'PUT',
             headers: this._getHeaders(),
-            body: JSON.stringify({ checked }),
+            body: JSON.stringify({ checked: true }),
         })
             .then(this._getJsonOrError)
+
     }
+
+    editAvatar(avatar) {
+        return fetch(`${this._host}/v1/cohort-47/users/me/avatar`, {
+            method: 'PATCH',
+            headers: this._getHeaders(),
+            body: JSON.stringify({ avatar }),
+        })
+            .then(this._getJsonOrError)
+
+    }
+
 
 }

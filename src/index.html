@@ -18,7 +18,8 @@
     <main class="content">
       <section class="profile">
         <div class="profile__wrapper">
-          <img src="<%=require('./img/image.jpg')%>" alt="Фото профиля" class="profile__avatar">
+          <img src="<%=require('./img/images.jpg')%>" alt="Фото профиля" class="profile__avatar">
+          <div class="profile__pic"></div>
           <div class="profile__info">
             <div class="profile__title">
               <h1 class="profile__name"></h1>
@@ -97,6 +98,19 @@
         <button name="saved" type="submit" class="popup__btn popup__btn_delete-card">Да</button>
       </div>
     </div>
+
+    <div class="popup popup_form_edit-avatar">
+      <div class="popup__container popup__container_edit-avatar">
+        <button type="button" class="popup__close popup__close_edit-avatar"></button>
+        <form id="editAvatar" name="editAvatar" class="popup__wrapper">
+          <h2 class="popup__title">Обновить аватар</h2>
+          <input type="url" required class="popup__input" placeholder="Ссылка на ваш аватар" name="avatar">
+          <span class="popup__message-error popup__message-error_avatar"></span>
+          <button name="saved" type="submit" class="popup__btn popup__btn_disabled">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
 
 
   </div>

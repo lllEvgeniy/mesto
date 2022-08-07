@@ -11,3 +11,4 @@ export const elemenTrash = document.querySelector('.element__trash')
 export const popupFormDeleteCard = document.querySelector('.popup_form_delete-card')
 export const inputLists = Array.from(document.querySelectorAll('.popup__input'));
 export const profileAvatar = document.querySelector('.profile__avatar');
+export const profilePic = document.querySelector('.profile__pic');

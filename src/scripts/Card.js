@@ -1,8 +1,8 @@
 import { popupFormDeleteCard } from "../utils/const.js";
-import { popupDeleteCard, get } from './index.js';
 
+import { popupDeleteCard, api } from './index.js';
 class Card {
-    constructor(data, cardSelector, openPopupImg, removeCardFromServer, get) {
+    constructor(data, cardSelector, openPopupImg, removeCardFromServer, get, checkTaskOnServer) {
         this._get = get
         this._ownerId = data.owner._id
         this._likes = data.likes
@@ -11,7 +11,7 @@ class Card {
         this._name = data.name;
         this._link = data.link;
         this._removeCardFromServer = removeCardFromServer
-
+        this._checkTaskOnServer = checkTaskOnServer
         this._openPopupImg = openPopupImg
     }
 
@@ -41,23 +41,28 @@ class Card {
         });
     }
 
-    _handleLikeCard() {
-        this._element.querySelector('.element__like').classList.toggle('element__like_active');
-    }
+    // _handleLikeCard(el) {
+    //     api.checkTask(this._id)
+    //         .then((data) => {
+    //             console.log(data.likes.indexOf("9ed86b818f4ce3d5f1a6bc6a"));
+    //             data.likes.includes("9ed86b818f4ce3d5f1a6bc6a")
+
+    //             el.querySelector('.element__counter').textContent = data.likes.length
+    //             this._element.querySelector('.element__like').classList.toggle('element__like_active');
+    //         })
+    // }
 
     _setEventListeners() {
         this._element.querySelector('.element__img').addEventListener('click', () => {
             this._openPopupImg(this._name, this._link)
         });
 
-
-
         this._element.querySelector('.element__trash').addEventListener('click', () => {
             popupDeleteCard.openPopup(this._popupFormDeleteCard(this._element));
         });
 
         this._element.querySelector('.element__like').addEventListener('click', () => {
-            this._handleLikeCard()
+            this._handleLikeCard(this._element)
         });
     }
 
@@ -71,6 +76,8 @@ class Card {
             const elTrash = this._element.querySelector('.element__trash')
             elTrash.style.display = "block"
         }
+
+
 
         return this._element;
     }

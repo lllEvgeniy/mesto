@@ -73,6 +73,17 @@ export default class Api {
 
     }
 
+    delLike(id) {
+        return fetch(`${this._host}/v1/cohort-47/cards/${id}/likes`, {
+            method: 'DELETE',
+            headers: this._getHeaders(),
+            body: JSON.stringify({ checked: true }),
+        })
+            .then(this._getJsonOrError)
+
+    }
+
+
     editAvatar(avatar) {
         return fetch(`${this._host}/v1/cohort-47/users/me/avatar`, {
             method: 'PATCH',

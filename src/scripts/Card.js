@@ -3,6 +3,7 @@ import { popupFormDeleteCard } from "../utils/const.js";
 import { popupDeleteCard, api } from './index.js';
 class Card {
     constructor(data, cardSelector, openPopupImg, removeCardFromServer, get, checkTaskOnServer) {
+        this._data = data;
         this._get = get
         this._ownerId = data.owner._id
         this._likes = data.likes
@@ -13,6 +14,7 @@ class Card {
         this._removeCardFromServer = removeCardFromServer
         this._checkTaskOnServer = checkTaskOnServer
         this._openPopupImg = openPopupImg
+
     }
 
     _getTemplate() {
@@ -41,18 +43,27 @@ class Card {
         });
     }
 
-    // _handleLikeCard(el) {
-    //     api.checkTask(this._id)
-    //         .then((data) => {
-    //             console.log(data.likes.indexOf("9ed86b818f4ce3d5f1a6bc6a"));
-    //             data.likes.includes("9ed86b818f4ce3d5f1a6bc6a")
+    _handleLikeCard(el) {
 
-    //             el.querySelector('.element__counter').textContent = data.likes.length
-    //             this._element.querySelector('.element__like').classList.toggle('element__like_active');
-    //         })
-    // }
+        api.checkTask(this._id)
+
+            .then((data) => {
+                console.log(data);
+                el.querySelector('.element__counter').textContent = data.likes.length
+                this._element.querySelector('.element__like').classList.add('element__like_active');
+            })
+    }
+
+    _handleDeleteLikeCard(el) {
+        api.delLike(this._id)
+            .then((data) => {
+                el.querySelector('.element__counter').textContent = data.likes.length
+                this._element.querySelector('.element__like').classList.remove('element__like_active');
+            })
+    }
 
     _setEventListeners() {
+
         this._element.querySelector('.element__img').addEventListener('click', () => {
             this._openPopupImg(this._name, this._link)
         });
@@ -62,7 +73,32 @@ class Card {
         });
 
         this._element.querySelector('.element__like').addEventListener('click', () => {
-            this._handleLikeCard(this._element)
+            api.checkTask(this._id)
+                .then((data) => {
+                    const id = data.likes.some((item) => {
+                        console.log(data.likes);
+                        return item._id == '9ed86b818f4ce3d5f1a6bc6a'
+                    })
+                    console.log(id);
+                    if (id.toString() == 'true') {
+                        console.log('del');
+                        this._handleDeleteLikeCard(this._element)
+                    } else {
+                        console.log('add');
+                        this._handleLikeCard(this._element)
+                    }
+                })
+            // const id = this._data.likes.some((item) => {
+            //     return item._id == '9ed86b818f4ce3d5f1a6bc6a'
+            // })
+            // console.log(id);
+
+
+
+
+
+
+
         });
     }
 

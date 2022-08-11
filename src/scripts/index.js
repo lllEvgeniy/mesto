@@ -9,7 +9,7 @@ import '../pages/index.css'
 import {
   buttonEdit, formEditName, formEditOccupation, newCardForm, buttonAdd, formsValid, inputLists, profileName, profileOccupation, profileAvatar, profilePic,
 } from '../utils/const.js'
-import PopupWithDeleteCard from './PopupWithDeleteCard.js'
+import PopupWithConfirmation from './PopupWithConfirmation.js'
 
 const objSelector = ({ title: profileName, subtitle: profileOccupation })
 const config = {
@@ -59,8 +59,6 @@ const userInfo = new UserInfo(objSelector)
 //     return result
 //   })
 
-
-
 const enableValidation = {};
 
 formsValid.forEach((formValid) => {
@@ -71,8 +69,6 @@ formsValid.forEach((formValid) => {
 })
 
 const cardListSelector = '.elements';
-
-
 
 const cards = new Section({
   items: [],
@@ -107,12 +103,17 @@ const createCard = (item) => {
 }
 
 
-
-
 const popupFormEdit = new PopupWithForm({
   selector: '.popup_form_edit-profile',
   handleFormSubmit: (formData) => {
+    popupFormEdit.loadMessage(true)
     api.editProfile(formData.name, formData.occupation)
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        popupFormEdit.loadMessage(false);
+      })
     userInfo.setUserInfo(formData)
     popupFormEdit.close
   }
@@ -122,12 +123,18 @@ const popupFormEdit = new PopupWithForm({
 const popupNewPlace = new PopupWithForm({
   selector: '.popup_form_edit-pictures',
   handleFormSubmit: (formData) => {
+    popupNewPlace.loadMessage(true)
     api.createCard(formData.name, formData.link)
       .then((item) => {
         const card = createCard(item)
         cards.addItem(card);
       })
-
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        popupFormEdit.loadMessage(false);
+      })
   }
 })
 
@@ -135,13 +142,20 @@ const popupEditAvatar = new PopupWithForm({
   selector: '.popup_form_edit-avatar',
   handleFormSubmit: (formData) => {
     profileAvatar.src = formData.avatar
+    popupEditAvatar.loadMessage(true)
     api.editAvatar(formData.avatar)
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        popupFormEdit.loadMessage(false);
+      })
     popupEditAvatar.close
   }
 })
 
 
-export const popupDeleteCard = new PopupWithDeleteCard(
+export const popupDeleteCard = new PopupWithConfirmation(
   '.popup_form_delete-card',
 )
 

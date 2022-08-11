@@ -1,7 +1,3 @@
-import { profileAvatar } from "../utils/const";
-
-const formEdit = document.querySelector('.popup_form_edit-profile');
-
 export default class UserInfo {
     constructor(objSelector) {
         this.title = objSelector.title

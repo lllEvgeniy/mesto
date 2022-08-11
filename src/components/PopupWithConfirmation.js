@@ -8,7 +8,7 @@ export default class PopupWithConfirmation extends Popup {
 
     setEventListeners() {
         this.popupBtn.addEventListener('click', () => {
-            this.closePopup(this.popup)
+           // this.closePopup(this.popup) ревью!!!!
         })
         super.setEventListeners()
     }

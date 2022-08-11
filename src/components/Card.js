@@ -1,6 +1,6 @@
 import { popupFormDeleteCard } from "../utils/const.js";
 
-import { popupDeleteCard, api } from './index.js';
+import { popupDeleteCard } from '../pages/index.js';
 class Card {
     constructor(data, cardSelector, openPopupImg, removeCardFromServer, id, { addLike, delLike }) {
         this._data = data;
@@ -60,10 +60,6 @@ class Card {
         this._elementLike.classList.remove('element__like_active')
     }
 
-
-
-
-
     _setEventListeners() {
 
         this._element.querySelector('.element__img').addEventListener('click', () => {
@@ -74,17 +70,12 @@ class Card {
             popupDeleteCard.openPopup(this._popupFormDeleteCard(this._element));
         });
 
-
-
         this._elementLike.addEventListener('click', (ev) => {
             if (ev.target.classList.contains('element__like_active')) {
                 this._delLike();
-                this.deleteClassLikeCard()
             }
             else {
                 this._addLike();
-                this.addClassLikeCard()
-
             }
         }
         )
@@ -94,6 +85,7 @@ class Card {
         this._element = this._getTemplate();
         this._elementLike = this._element.querySelector('.element__like')
         this._element.querySelector('.element__img').src = `${this._link}`;
+        this._element.querySelector('.element__img').alt = this._name;
         this._element.querySelector('.element__title').textContent = this._name;
         this._setEventListeners()
         this._element.querySelector('.element__counter').textContent = this._likes.length

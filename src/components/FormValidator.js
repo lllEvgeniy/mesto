@@ -13,6 +13,15 @@ class FormValidator {
         this._inputForms = Array.from(this._formValid.querySelectorAll(this._popupInput))
     }
 
+
+    resetValidation() {
+        this.handleToggleButtonState();
+        this._inputLists.forEach((inputElement) => {
+            this._handleHideInputError(inputElement)  ////прикрутить этот метод к закрытию попапа
+        });
+
+    }
+
     _handleHasInvalidInput() {
         return this._inputForms.some((el) => {
             return !el.validity.valid;
@@ -30,6 +39,7 @@ class FormValidator {
     };
 
     _handleShowInputError(inputElement) {
+
         const errorElement = inputElement.closest(this._popup).querySelector(`${this._errorMessage}${inputElement.name}`);
         inputElement.classList.add(this._inputTypeError);
         errorElement.textContent = inputElement.validationMessage;

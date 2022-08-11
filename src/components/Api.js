@@ -51,7 +51,7 @@ export default class Api {
         })
             .then(this._getJsonOrError)
             .then((result) => {
-                return result._id
+                return result
             });
     }
 

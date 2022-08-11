@@ -1,17 +1,18 @@
-import { Card } from './Card.js'
-import { FormValidator } from './FormValidator.js'
-import Section from './Section.js'
-import PopupWithForm from './PopupWithForm.js'
-import UserInfo from './UserInfo.js'
-import PopupWithImage from './PopupWithImage.js'
-import Api from './Api.js'
+import { Card } from '../components/Card.js'
+import { FormValidator } from '../components/FormValidator.js'
+import Section from '../components/Section.js'
+import PopupWithForm from '../components/PopupWithForm.js'
+import UserInfo from '../components/UserInfo.js'
+import PopupWithImage from '../components/PopupWithImage.js'
+import Api from '../components/Api.js'
 import '../pages/index.css'
+
 import {
   buttonEdit, formEditName, formEditOccupation, newCardForm, buttonAdd, formsValid, inputLists, profileName, profileOccupation, profileAvatar, profilePic,
 } from '../utils/const.js'
-import PopupWithConfirmation from './PopupWithConfirmation.js'
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js'
 
-const objSelector = ({ title: profileName, subtitle: profileOccupation })
+const objSelector = ({ title: profileName, subtitle: profileOccupation, avatar: profileAvatar })
 const config = {
   errorMessage: '.popup__message-error_',
   inputLists: inputLists,
@@ -29,17 +30,12 @@ const config = {
 }
 export const api = new Api(config.host, config.token)
 
-
-
-
 Promise.all([
   api.getInfo('users', '/me'),
   api.getInfo('cards', ''),
 ])
   .then(([dataUser, dataCards]) => {
-    profileAvatar.src = dataUser.avatar
-    profileName.textContent = dataUser.name
-    profileOccupation.textContent = dataUser.about
+    userInfo.setUserInfo(dataUser)
     userInfo.getId(dataUser)
     cards.renderItems(dataCards)
 
@@ -50,14 +46,6 @@ Promise.all([
 
 const userInfo = new UserInfo(objSelector)
 
-// api.getInfo('users', '/me')
-//   .then((result) => {
-//     profileAvatar.src = result.avatar
-//     profileName.textContent = result.name
-//     profileOccupation.textContent = result.about
-
-//     return result
-//   })
 
 const enableValidation = {};
 
@@ -88,12 +76,20 @@ const createCard = (item) => {
       api.addLike(item._id)
         .then((data) => {
           card.handleLikeCard(data.likes);
+          card.addClassLikeCard()
+        })
+        .catch((error) => {
+          console.log(error);
         })
     },
     delLike: () => {
       api.delLike(item._id)
         .then((data) => {
           card.handleDeleteLikeCard(data.likes);
+          card.deleteClassLikeCard()
+        })
+        .catch((error) => {
+          console.log(error);
         })
     }
   })
@@ -107,15 +103,17 @@ const popupFormEdit = new PopupWithForm({
   selector: '.popup_form_edit-profile',
   handleFormSubmit: (formData) => {
     popupFormEdit.loadMessage(true)
-    api.editProfile(formData.name, formData.occupation)
+    api.editProfile(formData.title, formData.subtitle)
+      .then((data) => {
+        userInfo.setUserInfo(data)
+        popupFormEdit.closePopup()
+      })
       .catch((error) => {
         console.log(error);
       })
       .finally(() => {
         popupFormEdit.loadMessage(false);
       })
-    userInfo.setUserInfo(formData)
-    popupFormEdit.close
   }
 })
 
@@ -128,12 +126,14 @@ const popupNewPlace = new PopupWithForm({
       .then((item) => {
         const card = createCard(item)
         cards.addItem(card);
+        popupNewPlace.closePopup()
+
       })
       .catch((error) => {
         console.log(error);
       })
       .finally(() => {
-        popupFormEdit.loadMessage(false);
+        popupNewPlace.loadMessage(false);
       })
   }
 })
@@ -141,16 +141,19 @@ const popupNewPlace = new PopupWithForm({
 const popupEditAvatar = new PopupWithForm({
   selector: '.popup_form_edit-avatar',
   handleFormSubmit: (formData) => {
-    profileAvatar.src = formData.avatar
     popupEditAvatar.loadMessage(true)
     api.editAvatar(formData.avatar)
+      .then(() => {
+        userInfo.setAvatar(formData)
+        popupEditAvatar.closePopup()
+      })
       .catch((error) => {
         console.log(error);
       })
       .finally(() => {
-        popupFormEdit.loadMessage(false);
+        popupEditAvatar.loadMessage(false);
       })
-    popupEditAvatar.close
+
   }
 })
 
@@ -158,7 +161,6 @@ const popupEditAvatar = new PopupWithForm({
 export const popupDeleteCard = new PopupWithConfirmation(
   '.popup_form_delete-card',
 )
-
 
 const popupWithImage = new PopupWithImage({
   selector: '.popup_type_image',
@@ -176,8 +178,7 @@ buttonAdd.addEventListener('click', function () {
 buttonEdit.addEventListener('click', function () {
   enableValidation.editProfile.handleToggleButtonState()
   const data = userInfo.getUserInfo()
-  formEditName.value = data.title
-  formEditOccupation.value = data.subtitle
+  popupFormEdit.setInputValues(data)
   popupFormEdit.openPopup();
 });
 

@@ -1,21 +1,17 @@
-import { popupFormDeleteCard } from "../utils/const.js";
-
-import { popupDeleteCard } from '../pages/index.js';
 class Card {
-    constructor(data, cardSelector, openPopupImg, removeCardFromServer, id, { addLike, delLike }) {
+    constructor(data, cardSelector, openPopupImg, popupDeleteCard, id, { addLike, delLike }) {
         this._data = data;
-        this._dataId = data._id
+        this.dataId = data._id
         this._ownerId = data.owner._id
         this._likes = data.likes
         this._id = id
         this._cardSelector = cardSelector;
         this._name = data.name;
         this._link = data.link;
-        this._removeCardFromServer = removeCardFromServer
         this._openPopupImg = openPopupImg
         this._delLike = delLike
         this._addLike = addLike
-
+        this._popupDeleteCard = popupDeleteCard
     }
 
     _getTemplate() {
@@ -25,23 +21,6 @@ class Card {
             .querySelector('.element')
             .cloneNode(true);
         return cardElement;
-    }
-
-    async _handleRemoveCard(el) {
-
-        try {
-            await this._removeCardFromServer(this._dataId)
-            el.remove()
-        } catch (error) {
-            console.log(error);
-        }
-
-    }
-
-    _popupFormDeleteCard(el) {
-        popupFormDeleteCard.querySelector('.popup__btn').addEventListener('click', () => {
-            this._handleRemoveCard(el)
-        });
     }
 
     handleLikeCard(dataLikes) {
@@ -61,13 +40,12 @@ class Card {
     }
 
     _setEventListeners() {
-
         this._element.querySelector('.element__img').addEventListener('click', () => {
             this._openPopupImg(this._name, this._link)
         });
 
         this._element.querySelector('.element__trash').addEventListener('click', () => {
-            popupDeleteCard.openPopup(this._popupFormDeleteCard(this._element));
+           this._popupDeleteCard.openPopup(this.dataId, this._element);
         });
 
         this._elementLike.addEventListener('click', (ev) => {

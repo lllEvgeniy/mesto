@@ -8,7 +8,7 @@ import Api from '../components/Api.js'
 import '../pages/index.css'
 
 import {
-  buttonEdit, formEditName, formEditOccupation, newCardForm, buttonAdd, formsValid, inputLists, profileName, profileOccupation, profileAvatar, profilePic,
+  buttonEdit, newCardForm, buttonAdd, formsValid, inputLists, profileName, profileOccupation, profileAvatar, profilePic,
 } from '../utils/const.js'
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js'
 
@@ -46,7 +46,6 @@ Promise.all([
 
 const userInfo = new UserInfo(objSelector)
 
-
 const enableValidation = {};
 
 formsValid.forEach((formValid) => {
@@ -68,10 +67,9 @@ const cards = new Section({
   cardListSelector
 );
 
-
 const createCard = (item) => {
   const id = userInfo.returnId()
-  const card = new Card(item, '#user', openPopupImg, deleteCard, id, {
+  const card = new Card(item, '#user', openPopupImg, popupDeleteCard, id, {
     addLike: () => {
       api.addLike(item._id)
         .then((data) => {
@@ -94,10 +92,8 @@ const createCard = (item) => {
     }
   })
   const createdCard = card.generateCard();
-
   return createdCard;
 }
-
 
 const popupFormEdit = new PopupWithForm({
   selector: '.popup_form_edit-profile',
@@ -117,6 +113,19 @@ const popupFormEdit = new PopupWithForm({
   }
 })
 
+const popupDeleteCard = new PopupWithConfirmation({
+  selector: '.popup_form_delete-card',
+  delCard: (data, card) => {
+    api.deleteCard(data)
+      .then(() => {
+        card.remove()
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+}
+)
 
 const popupNewPlace = new PopupWithForm({
   selector: '.popup_form_edit-pictures',
@@ -127,7 +136,6 @@ const popupNewPlace = new PopupWithForm({
         const card = createCard(item)
         cards.addItem(card);
         popupNewPlace.closePopup()
-
       })
       .catch((error) => {
         console.log(error);
@@ -153,14 +161,8 @@ const popupEditAvatar = new PopupWithForm({
       .finally(() => {
         popupEditAvatar.loadMessage(false);
       })
-
   }
 })
-
-
-export const popupDeleteCard = new PopupWithConfirmation(
-  '.popup_form_delete-card',
-)
 
 const popupWithImage = new PopupWithImage({
   selector: '.popup_type_image',
@@ -172,11 +174,13 @@ const openPopupImg = (title, link) => {
 
 buttonAdd.addEventListener('click', function () {
   enableValidation.newPlace.handleToggleButtonState()
+  enableValidation.newPlace.resetValidation()
   popupNewPlace.openPopup(newCardForm);
 });
 
 buttonEdit.addEventListener('click', function () {
   enableValidation.editProfile.handleToggleButtonState()
+  enableValidation.editProfile.resetValidation()
   const data = userInfo.getUserInfo()
   popupFormEdit.setInputValues(data)
   popupFormEdit.openPopup();
@@ -184,18 +188,12 @@ buttonEdit.addEventListener('click', function () {
 
 profilePic.addEventListener('click', function () {
   enableValidation.editAvatar.handleToggleButtonState()
+  enableValidation.editAvatar.resetValidation()
   popupEditAvatar.openPopup();
 });
-
 
 popupFormEdit.setEventListeners()
 popupNewPlace.setEventListeners()
 popupWithImage.setEventListeners()
 popupDeleteCard.setEventListeners()
 popupEditAvatar.setEventListeners()
-
-
-function deleteCard(id) {
-  return api.deleteCard(id)
-}
-

@@ -13,11 +13,10 @@ class FormValidator {
         this._inputForms = Array.from(this._formValid.querySelectorAll(this._popupInput))
     }
 
-
     resetValidation() {
         this.handleToggleButtonState();
         this._inputLists.forEach((inputElement) => {
-            this._handleHideInputError(inputElement)  ////прикрутить этот метод к закрытию попапа
+            this._handleHideInputError(inputElement)
         });
 
     }

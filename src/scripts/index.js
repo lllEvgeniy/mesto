@@ -29,14 +29,35 @@ const config = {
 }
 export const api = new Api(config.host, config.token)
 
-export const get = api.getInfo('users', '/me')
-  .then((result) => {
-    profileAvatar.src = result.avatar
-    profileName.textContent = result.name
-    profileOccupation.textContent = result.about
 
-    return result
+
+
+Promise.all([
+  api.getInfo('users', '/me'),
+  api.getInfo('cards', ''),
+])
+  .then(([dataUser, dataCards]) => {
+    profileAvatar.src = dataUser.avatar
+    profileName.textContent = dataUser.name
+    profileOccupation.textContent = dataUser.about
+    userInfo.getId(dataUser)
+    cards.renderItems(dataCards)
+
   })
+  .catch((errorMessage) => {
+    console.log(errorMessage);
+  })
+
+const userInfo = new UserInfo(objSelector)
+
+// api.getInfo('users', '/me')
+//   .then((result) => {
+//     profileAvatar.src = result.avatar
+//     profileName.textContent = result.name
+//     profileOccupation.textContent = result.about
+
+//     return result
+//   })
 
 
 
@@ -54,10 +75,7 @@ const cardListSelector = '.elements';
 
 
 const cards = new Section({
-  items: api.getInfo('cards', '')
-    .then((items) => {
-      return (items);
-    }),
+  items: [],
   renderer: (item) => {
     const card = createCard(item)
     cards.addItem(card)
@@ -67,15 +85,28 @@ const cards = new Section({
 );
 
 
-
-
 const createCard = (item) => {
-  const card = new Card(item, '#user', openPopupImg, deleteCard, get, checkTask);
+  const id = userInfo.returnId()
+  const card = new Card(item, '#user', openPopupImg, deleteCard, id, {
+    addLike: () => {
+      api.addLike(item._id)
+        .then((data) => {
+          card.handleLikeCard(data.likes);
+        })
+    },
+    delLike: () => {
+      api.delLike(item._id)
+        .then((data) => {
+          card.handleDeleteLikeCard(data.likes);
+        })
+    }
+  })
   const createdCard = card.generateCard();
+
   return createdCard;
 }
 
-const userInfo = new UserInfo(objSelector)
+
 
 
 const popupFormEdit = new PopupWithForm({
@@ -141,7 +172,7 @@ profilePic.addEventListener('click', function () {
   popupEditAvatar.openPopup();
 });
 
-cards.renderItems();
+
 popupFormEdit.setEventListeners()
 popupNewPlace.setEventListeners()
 popupWithImage.setEventListeners()
@@ -153,6 +184,3 @@ function deleteCard(id) {
   return api.deleteCard(id)
 }
 
-function checkTask(id) {
-  return api.checkTask(id)
-}

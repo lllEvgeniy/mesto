@@ -8,13 +8,14 @@ export default class Section {
 
 
 
-    renderItems() {
-        this._renderedItems.then(data => {
-            data.reverse()
-            data.forEach((item) => {
-                this._renderer(item);
-            });
-        })
+    renderItems(items) {
+
+        items.reverse()
+        .forEach((item) => {
+
+            this._renderer(item);
+        });
+
     }
 
     addItem(element) {

@@ -63,11 +63,11 @@ export default class Api {
             .then(this._getJsonOrError)
     }
 
-    checkTask(id) {
+    addLike(id) {
+
         return fetch(`${this._host}/v1/cohort-47/cards/${id}/likes`, {
             method: 'PUT',
             headers: this._getHeaders(),
-            body: JSON.stringify({ checked: true }),
         })
             .then(this._getJsonOrError)
 
@@ -77,7 +77,6 @@ export default class Api {
         return fetch(`${this._host}/v1/cohort-47/cards/${id}/likes`, {
             method: 'DELETE',
             headers: this._getHeaders(),
-            body: JSON.stringify({ checked: true }),
         })
             .then(this._getJsonOrError)
 

@@ -119,6 +119,8 @@ const popupDeleteCard = new PopupWithConfirmation({
     api.deleteCard(data)
       .then(() => {
         card.remove()
+        popupDeleteCard.closePopup()
+
       })
       .catch((error) => {
         console.log(error);

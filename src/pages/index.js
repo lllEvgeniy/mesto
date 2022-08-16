@@ -120,7 +120,6 @@ const popupDeleteCard = new PopupWithConfirmation({
       .then(() => {
         card.remove()
         popupDeleteCard.closePopup()
-
       })
       .catch((error) => {
         console.log(error);
